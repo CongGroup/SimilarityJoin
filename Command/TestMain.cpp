@@ -72,7 +72,7 @@ T PrintAndGet(char *szMsg)
 
 void PrintCmdList() {
     system("clear");
-    cout << endl << endl << "              Controller Command List" << endl << endl;
+    cout << endl << endl << "            ITF_SimilarityJoin Command List" << endl << endl;
     cout << "  =====================================================" << endl << "  ||" << endl;
     cout << "  ||  Input Command Below :" << endl << "  ||" << endl;
     cout << "  =====================================================" << endl << "  ||" << endl;
@@ -92,10 +92,9 @@ void PrintCmdList() {
     cout << "  || c [ Part 7 ] Strategy III Security Distribution" << endl;
 
 
-    cout << "  || 5 " << endl;
-    cout << "  || 6 " << endl;
-    cout << "  || 7 " << endl;
-    cout << "  || 8 " << endl << "  ||" << endl;
+    cout << "  ||  " << endl;
+    cout << "  ||  " << endl;
+
 
 
     cout << "  =====================================================" << endl << "  ||" << endl;
