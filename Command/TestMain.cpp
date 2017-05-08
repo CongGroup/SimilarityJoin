@@ -371,10 +371,10 @@ ostream& operator << (ostream& out, const Proportion& por)
 {
 	cout.setf(ios::right);
 	cout << "Total " << setw(6) << por.total << endl;
-	cout << "Type A" << setw(6) << por.counter[0] << "  , percentage is " << setw(4) << (por.counter[0] + .0)/por.total<<endl;
-	cout << "Type B" << setw(6) << por.counter[1] << "  , percentage is " << setw(4) << (por.counter[1] + .0)/por.total<<endl;
-	cout << "Type C" << setw(6) << por.counter[2] << "  , percentage is " << setw(4) << (por.counter[2] + .0)/por.total<<endl;
-	cout << "Type D" << setw(6) << por.counter[3] << "  , percentage is " << setw(4) << (por.counter[3] + .0)/por.total<<endl;
+	cout << "Type A" << setw(6) << por.counter[0] << "  , percentage is " << setw(4) << (por.counter[0] + .0)/por.total<<"%"<<endl;
+	cout << "Type B" << setw(6) << por.counter[1] << "  , percentage is " << setw(4) << (por.counter[1] + .0)/por.total<<"%"<<endl;
+	cout << "Type C" << setw(6) << por.counter[2] << "  , percentage is " << setw(4) << (por.counter[2] + .0)/por.total<<"%"<<endl;
+	cout << "Type D" << setw(6) << por.counter[3] << "  , percentage is " << setw(4) << (por.counter[3] + .0)/por.total<<"%"<<endl;
 	cout.unsetf(ios::right);
 	return out;
 }
@@ -1456,16 +1456,16 @@ int main(int argc, char **argv)
             uint32_t uiTimeCost = TimeDiff::DiffTimeInMicroSecond();
             cout << "Build Index cost time : " << uiTimeCost << endl;
 
-            map<uint64_t, uint32_t> *pMapCounter = encIndex.GetCounterMap();
-            uint32_t uiAllCounterSum = 0;
-            uint32_t uiDistinctCounter = 0;
-            uint32_t uiMaxCounter = 0;
-            for (map<uint64_t, uint32_t>::iterator it = pMapCounter->begin(); it != pMapCounter->end(); it++)
-            {
-                uiDistinctCounter++;
-                uiAllCounterSum += it->second;
-                uiMaxCounter = uiMaxCounter > it->second ? uiMaxCounter : it->second;
-            }
+            //map<uint64_t, uint32_t> *pMapCounter = encIndex.GetCounterMap();
+            //uint32_t uiAllCounterSum = 0;
+            //uint32_t uiDistinctCounter = 0;
+            //uint32_t uiMaxCounter = 0;
+            //for (map<uint64_t, uint32_t>::iterator it = pMapCounter->begin(); it != pMapCounter->end(); it++)
+            //{
+            //    uiDistinctCounter++;
+            //    uiAllCounterSum += it->second;
+            //    uiMaxCounter = uiMaxCounter > it->second ? uiMaxCounter : it->second;
+            //}
             //cout << "uiDistinctCounter = " << uiDistinctCounter << endl;
             //cout << "uiAllCounterSum = " << uiAllCounterSum << endl;
             //cout << "uiMaxCounter = " << uiMaxCounter << endl;
