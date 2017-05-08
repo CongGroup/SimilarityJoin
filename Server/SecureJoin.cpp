@@ -70,7 +70,7 @@ uint32_t SecureJoin::loadData(string mataDataPaht, uint32_t maxSize)
 	if (ifs.fail() || uiAllNum < 0 || uiDataDimension < 0)
 	{
 		cout << "The file did not exists." << endl;
-		return false;
+		return -1;
 	}
 	else
 	{
@@ -106,7 +106,7 @@ uint32_t SecureJoin::loadData(string mataDataPaht, uint32_t maxSize)
 			uiCurNum++;
 		}
 		ifs.close();
-		return true;
+		return tmpAllNum;
 	}
 }
 
