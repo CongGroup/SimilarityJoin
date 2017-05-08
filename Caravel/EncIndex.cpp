@@ -44,7 +44,10 @@ uint64_t EncIndex::Init(uint32_t uiAllNum, double dLoad, uint32_t uiFloor, key_t
     {
         m_bukHash.Create(keyShm, uiW, uiL, true);
     }
-
+	if (m_bukHash.GetErr().size() > 0)
+	{
+		cout << m_bukHash.GetErr() << endl;
+	}
 }
 
 void EncIndex::AttachIndex(uint32_t uiAllNum, double dLoad, uint32_t uiFloor, key_t keyShm)

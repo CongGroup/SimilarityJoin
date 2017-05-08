@@ -55,7 +55,7 @@ public:
         //Get Shm Memory
         if (!ShmCtl::GetShm(&m_pHead, kKey, m_sizMem))
         {
-            sErr = "ERROR : Get Shm False!";
+            sErr = "ERROR : Get Shm False, key is kKey, size is m_sizMem!";
             return false;
         }
         //Init Data
