@@ -12,8 +12,9 @@ public partial class API_GetIndexDistribution : System.Web.UI.Page
         ThriftAdapter adapter = new ThriftAdapter(WebConfig.ServerIP, WebConfig.ServerPort);
         adapter.Open();
         SimilarityJoinService.Client client = adapter.GetClient();
-
         List<int> list = client.GetIndexDistributed();
+        adapter.Close();
+
 
         IndexDistribution indexDistribution = new IndexDistribution();
         indexDistribution.Labels = new string[WebConfig.FinancialKind];
@@ -21,10 +22,10 @@ public partial class API_GetIndexDistribution : System.Web.UI.Page
 
         for (int i = 0; i < WebConfig.FinancialKind; i++)
         {
-            indexDistribution.Labels[i] = "VIP" + i.ToString();
+            indexDistribution.Labels[i] = "VIP" + (i + 1).ToString();
             indexDistribution.Numbers[i] = list[i];
         }
-        
+
         string res = JsonHelper.Serialize(indexDistribution);
         Response.Write(res);
         Response.End();

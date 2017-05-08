@@ -86,7 +86,7 @@
 
 
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-4">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>Pie Chart Example</h5>
@@ -120,11 +120,7 @@
     <script src="js/plugins/flot/jquery.flot.js"></script>
     <script src="js/plugins/flot/jquery.flot.tooltip.min.js"></script>
     <script src="js/plugins/flot/jquery.flot.pie.js"></script>
-    <script>
+    <script src="js/index.js"></script>
 
-        
-
-
-    </script>
 </asp:Content>
 

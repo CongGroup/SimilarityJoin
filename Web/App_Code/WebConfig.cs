@@ -17,7 +17,7 @@ public class WebConfig
     public static string LoginUserID = "user";
 
 
-    public static string ServerIP = "127.0.0.1";
+    public static string ServerIP = "54.254.203.15";
     public static int ServerPort = 9090;
 
     public static int FinancialKind = 4;
