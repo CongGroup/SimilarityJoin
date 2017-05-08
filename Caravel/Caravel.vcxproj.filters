@@ -33,6 +33,9 @@
     <ClCompile Include="TimeDiff.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="EncIndex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BukHash.h">
@@ -54,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TimeDiff.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EncIndex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

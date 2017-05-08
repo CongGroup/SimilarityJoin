@@ -115,6 +115,7 @@
   <ItemGroup>
     <ClCompile Include="C2Lsh.cpp" />
     <ClCompile Include="Digest.cpp" />
+    <ClCompile Include="EncIndex.cpp" />
     <ClCompile Include="PRF.cpp" />
     <ClCompile Include="SemCtl.cpp" />
     <ClCompile Include="ShmCtl.cpp" />
@@ -124,6 +125,7 @@
     <ClInclude Include="BukHash.h" />
     <ClInclude Include="C2Lsh.h" />
     <ClInclude Include="Digest.h" />
+    <ClInclude Include="EncIndex.h" />
     <ClInclude Include="PRF.h" />
     <ClInclude Include="SemCtl.h" />
     <ClInclude Include="ShmCtl.h" />
