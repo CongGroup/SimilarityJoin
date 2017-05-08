@@ -128,6 +128,11 @@ void EncIndex::QueryOne(uint32_t uiLsh, uint32_t uiF, vector<uint32_t> &vecResul
     }
 }
 
+uint32_t EncIndex::getIndexSize()
+{
+	return m_bukHash.getCapacity();
+}
+
 void EncIndex::TestEncIndex(uint32_t uiLsh, uint32_t uiVal)
 {
     cout << "Begin to Test Insert 10 value" << endl;

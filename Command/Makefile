@@ -33,7 +33,8 @@ all: $(BIN)
 	$(CC) -c $(FLAGS) $(INC) $< -o $@
 
 TestMain:$(OBJ)
-	$(CC) $(FLAGS) -o $@ $@.o $(COMMON_OBJ) $(LIB)
+	mkdir -p ../bin
+	$(CC) $(FLAGS) -o ../bin/Command $@.o $(COMMON_OBJ) $(LIB)
 
 clean:
 	$(RM) *.o

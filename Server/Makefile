@@ -1,11 +1,11 @@
 CC=g++
-BIN=TestMain
+BIN=SimilarityJoinService_server
 #TestAll
 FLAGS=-Wall -g -fpermissive -std=c++0x
 RM=-rm -f
 SRC=$(wildcard *.cpp)
 OBJ=$(SRC:.cpp=.o)
-COMMON_OBJ=$(filter-out TestMain.o,$(OBJ))
+COMMON_OBJ=$(filter-out SimilarityJoinService_server.o,$(OBJ))
 
 #thrift
 THRIFT_LINK=-lthrift
@@ -32,8 +32,9 @@ all: $(BIN)
 %.o: %.cpp %.d
 	$(CC) -c $(FLAGS) $(INC) $< -o $@
 
-TestMain:$(OBJ)
-	$(CC) $(FLAGS) -o $@ $@.o $(COMMON_OBJ) $(LIB)
+SimilarityJoinService_server:$(OBJ)
+	mkdir -p ../bin
+	$(CC) $(FLAGS) -o ../bin/server $@.o $(COMMON_OBJ) $(LIB)
 
 clean:
 	$(RM) *.o

@@ -25,11 +25,11 @@ typedef struct _stQueryResult
 
 #define DEF_BUKENCBLOCK_SIZE 32
 
-typedef union
+typedef union stBukEncBlock
 {
     int iID;
     char szBuf[DEF_BUKENCBLOCK_SIZE];
-}stBukEncBlock;
+}BukEncBlock;
 
 class EncIndex
 {
@@ -74,6 +74,8 @@ public:
     void Insert(uint32_t uiLsh, uint32_t uiF, uint32_t uiVal);
 
     void QueryOne(uint32_t uiLsh, uint32_t uiF, vector<uint32_t> &vecResult);
+
+	uint32_t getIndexSize();
 
 private:
 

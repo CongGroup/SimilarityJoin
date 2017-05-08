@@ -295,6 +295,16 @@ public:
         cout<<"The Bhash Has Real Elements : "<<uiAllCnt<<endl;
     }
 
+	uint32_t getCapacity()
+	{
+		uint32_t capacity = 0;
+		for (uint32_t uiCur = 0; uiCur < m_uiL; uiCur++)
+		{
+			capacity += m_arPrime[uiCur];
+		}
+		return capacity;
+	}
+
 
 private:
 

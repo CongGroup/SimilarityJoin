@@ -15,40 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="EncIndex.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SimilarityJoinTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="TestMain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="EncIndex.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SecureJoin.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SecureJoinI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SecureJoinII.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SecureJoinIII.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SimilarityJoin.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SimilarityJoinTest.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Makefile" />
+    <None Include="Makefile">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

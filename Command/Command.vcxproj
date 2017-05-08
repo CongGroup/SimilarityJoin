@@ -110,21 +110,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="EncIndex.cpp" />
-    <ClCompile Include="SimilarityJoinTest.cpp" />
-    <ClCompile Include="TestMain.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="EncIndex.h" />
-    <ClInclude Include="SecureJoin.h" />
-    <ClInclude Include="SecureJoinI.h" />
-    <ClInclude Include="SecureJoinII.h" />
-    <ClInclude Include="SecureJoinIII.h" />
-    <ClInclude Include="SimilarityJoin.h" />
-    <ClInclude Include="SimilarityJoinTest.h" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Makefile" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TestMain.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
