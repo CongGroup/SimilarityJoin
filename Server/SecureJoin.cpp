@@ -228,8 +228,6 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 	set<uint32_t> setResult;
 	markSecond();
 
-	cout << "uiJoinNum" << uiJoinNum << "uiDataDimension" << uiDataDimension << endl;
-
 	uint32_t **queryLsh = new uint32_t*[uiJoinNum];
 	for (int i = 0; i < uiJoinNum; i++)
 	{
@@ -248,8 +246,6 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 			uint32_t uiLsh = arQueryLsh[uiL];
 			encIndex.QueryOne(uiLsh, uiL, vecResult);
 		}
-		//cout << "about Self" << endl;
-		//abort();
 
 		map<uint32_t, uint32_t> mapCombine;
 		vector<uint32_t> vecResultInK;
