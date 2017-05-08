@@ -42,7 +42,7 @@
 
                 <a href="#"><small>Forget password ?</small></a>
             </form>
-            <p class="m-t"> <small>Similarity Join Demo | ITF Project 版权所有 &copy; 2017</small> </p>
+            <p class="m-t"> <small>Similarity Join Demo | ITF Project Copyright &copy; 2017</small> </p>
         </div>
     </div>
 
