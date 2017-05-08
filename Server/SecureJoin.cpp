@@ -129,17 +129,6 @@ bool SecureJoin::computeLSH(uint32_t L, double w)
 	{
 		arLsh[uiCur] = new uint32_t[uiLshL];
 		c2lsh.Compute(arMetaVal[uiCur], arLsh[uiCur]);
-		
-
-		//TODEL
-		if (uiCur == 0)
-		{
-			cout << "uiDataDimension" << uiDataDimension << endl;
-			for (int i = 0; i < uiDataDimension; i++)
-			{
-				cout << arLsh[uiCur][i] << " ";
-			}
-		}
 	}
 
 	return true;
@@ -178,7 +167,7 @@ bool SecureJoin::buildIndex(uint32_t size)
 
 	encIndex.ShowBukHashState();
 	indexSize = encIndex.getIndexSize()/ uiLshL;
-	indexMomery = indexSize * sizeof(BukEncBlock);
+	indexMomery = encIndex.getIndexSize() * (sizeof(uint64_t)+sizeof(BukEncBlock));
 
 	return true;
 }
@@ -239,8 +228,6 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 	set<uint32_t> setResult;
 	markSecond();
 
-	cout << "uiJoinNum" << uiJoinNum << "uiDataDimension" << uiDataDimension << endl;
-
 	uint32_t **queryLsh = new uint32_t*[uiJoinNum];
 	for (int i = 0; i < uiJoinNum; i++)
 	{
@@ -259,8 +246,6 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 			uint32_t uiLsh = arQueryLsh[uiL];
 			encIndex.QueryOne(uiLsh, uiL, vecResult);
 		}
-		//cout << "about Self" << endl;
-		//abort();
 
 		map<uint32_t, uint32_t> mapCombine;
 		vector<uint32_t> vecResultInK;
