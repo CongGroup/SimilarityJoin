@@ -34,7 +34,7 @@ all: $(BIN)
 
 TestMain:$(OBJ)
 	mkdir -p ../bin
-	$(CC) $(FLAGS) -o ../bin/Command $@.o $(COMMON_OBJ) $(LIB)
+	$(CC) $(FLAGS) -o ../bin/command $@.o $(COMMON_OBJ) $(LIB)
 
 clean:
 	$(RM) *.o

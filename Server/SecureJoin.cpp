@@ -93,7 +93,15 @@ uint32_t SecureJoin::loadData(string mataDataPaht, uint32_t maxSize)
 			splitString(strLines, splitRes, " ");
 			for (int i = 0; i < splitRes.size() && i < uiDataDimension; i++)
 			{
-				arMetaVal[uiCurNum][i] = stod(splitRes[i]);
+				try
+				{
+					arMetaVal[uiCurNum][i] = stod(splitRes[i]);
+				}
+				catch (invalid_argument e)
+				{
+					cout << splitRes[i] << "can`t be convert to double" << endl;
+					arMetaVal[uiCurNum][i] = 0;
+				}
 			}
 			indexDistributed.counter[checkLevel(arMetaVal[uiCurNum])]++;
 		}
