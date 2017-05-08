@@ -45,7 +45,7 @@ public:
         if (0 == uiSum)
         {
             //无法创建质数数组
-            sErr = "ERROR : Can 't Create Prime Array.";
+            sErr = "ERROR : Can 't Create Prime Array, the width is "<<uiW<<" L is "<<uiL<<".";
             return false;
         }
         m_uiAllNum = uiSum;

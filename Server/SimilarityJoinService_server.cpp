@@ -26,7 +26,9 @@ protected:
 public:
 	SimilarityJoinServiceHandler() 
 	{
-		userCount = joinEngine.loadData("financeMate.data");
+		string path = "financeMate.data";
+		userCount = joinEngine.loadData(path);
+		cout << "Load " << userCount << "data from" << path << endl;
 		joinEngine.computeLSH(250, 1.5);
 		joinEngine.buildIndex(userCount);
 	}
