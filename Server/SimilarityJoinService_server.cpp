@@ -176,7 +176,7 @@ public:
 			}
 		}
 
-		_return = joinEngine.joinByStrategy3(buffer, Datas.size(), ThresholdK);
+		_return = joinEngine.joinByStrategy3(buffer, Datas.size(), ThresholdK, SelfQueryR);
 
 		for (int i = 0; i < Datas.size(); i++)
 		{
@@ -189,11 +189,11 @@ public:
 
 int main(int argc, char **argv) {
 	int port = 9090;
-	shared_ptr<SimilarityJoinServiceHandler> handler(new SimilarityJoinServiceHandler());
-	shared_ptr<TProcessor> processor(new SimilarityJoinServiceProcessor(handler));
-	shared_ptr<TServerTransport> serverTransport(new TServerSocket(port));
-	shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
-	shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
+	boost::shared_ptr<SimilarityJoinServiceHandler> handler(new SimilarityJoinServiceHandler());
+	boost::shared_ptr<TProcessor> processor(new SimilarityJoinServiceProcessor(handler));
+	boost::shared_ptr<TServerTransport> serverTransport(new TServerSocket(port));
+	boost::shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
+	boost::shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
 
 	TSimpleServer server(processor, serverTransport, transportFactory, protocolFactory);
 	server.serve();
