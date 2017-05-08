@@ -169,7 +169,7 @@ bool SecureJoin::buildIndex(uint32_t size)
 
 
 	encIndex.ShowBukHashState();
-	indexSize = encIndex.getIndexSize();
+	indexSize = encIndex.getIndexSize()/ uiLshL;
 	indexMomery = indexSize * sizeof(BukEncBlock);
 
 	return true;
