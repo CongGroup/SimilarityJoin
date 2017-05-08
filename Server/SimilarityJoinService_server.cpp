@@ -101,7 +101,8 @@ public:
 		_return.push_back(to_string(joinEngine.uiUserNum));
 		_return.push_back(to_string(joinEngine.indexSize));
 		_return.push_back(to_string(joinEngine.indexMomery));
-		_return.push_back("16433180MB");
+		//16433180Kb memory
+		_return.push_back("16433180");
 	}
 
 	void JoinByStrategy1(std::vector<int32_t> & _return, const std::vector<std::string> & Datas, const int32_t ThresholdK, const int32_t TimeOut) {
