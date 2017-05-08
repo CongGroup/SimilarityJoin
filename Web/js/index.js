@@ -2,13 +2,13 @@
 
     $.get("API/GetIndexMetaData.aspx", function (result) {
         var res = JSON.parse(result);
-        $('#index_current_number').val(res.IndexCurrentNum);
+        $('#index_current_number').html(res.IndexCurrentNum);
 
-        $('#index_total_number').val(res.IndexTotalNum);
-        $('#index_usable_number').val(res.IndexTotalNum - res.IndexCurrentNum);
-        $('#index_load').val(res.IndexLoad + "%");
-        $('#index_memory_size').val(res.IndexMemorySize);
-        $('#index_memory_use_percent').val(res.MemoryUsePercent + "%");
+        $('#index_total_number').html(res.IndexTotalNum);
+        $('#index_usable_number').html(res.IndexTotalNum - res.IndexCurrentNum);
+        $('#index_load').html(res.IndexLoad + "%");
+        $('#index_memory_size').html(res.IndexMemorySize);
+        $('#index_memory_use_percent').html(res.MemoryUsePercent + "%");
 
     });
 
@@ -79,4 +79,5 @@ function initIndexDistribution() {
 }
 
 
-
+initIndexMetaData();
+initIndexDistribution();
