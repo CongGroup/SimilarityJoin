@@ -18,7 +18,7 @@
 #include "../Caravel/TimeDiff.h"
 
 
-#include "EncIndex.h"
+#include "../Caravel/EncIndex.h"
 
 #define DEF_INDEX_LOAD 0.7D
 #define DEF_INDEX_FLOOR 24
