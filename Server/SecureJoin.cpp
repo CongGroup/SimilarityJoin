@@ -242,7 +242,8 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 		for (uint32_t uiL = 0; uiL < uiLshL; uiL++)
 		{
 			uint32_t uiLsh = arQueryLsh[uiL];
-			encIndex.QueryOne(uiLsh, uiL, vecResult);
+			//encIndex.QueryOne(uiLsh, uiL, vecResult);
+			encIndex.QueryOne(0, uiL, vecResult);
 		}
 
 		map<uint32_t, uint32_t> mapCombine;
