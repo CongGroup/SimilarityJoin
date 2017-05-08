@@ -2,6 +2,7 @@
 #include <map>
 #include <time.h>
 #include <sstream>
+#include <sys/shm.h>
 
 #include "SecureJoin.h"
 #include "../Caravel/BukHash.h"
@@ -154,9 +155,19 @@ bool SecureJoin::buildIndex(uint32_t size)
 	}
 	uiUserNum = size;
 
-	encIndex.Init(uiUserNum * uiLshL, 0.7, 24, shmKey);
+	int iShmID = shmget(shmKey, 0, 0);
+	if (iShmID >= 0)
+	{
+		encIndex.AttachIndex(uiUserNum * uiLshL, 0.7, 24, shmKey);
+	}
+	else
+	{
+		encIndex.Init(uiUserNum * uiLshL, 0.7, 24, shmKey);
 
-	encIndex.BuildIndex(arLsh, uiUserNum, uiLshL);
+		encIndex.BuildIndex(arLsh, uiUserNum, uiLshL);
+	}
+
+
 
 	encIndex.ShowBukHashState();
 	indexSize = encIndex.getIndexSize();

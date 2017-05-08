@@ -28,7 +28,7 @@ public:
 	{
 		string path = "financeMate.data";
 		userCount = joinEngine.loadData(path);
-		cout << "Load " << userCount << "data from" << path << endl;
+		cout << "Load " << userCount << " data from " << path << endl;
 		joinEngine.computeLSH(250, 1.5);
 		joinEngine.buildIndex(userCount);
 	}
@@ -189,16 +189,50 @@ public:
 
 };
 
+//int main(int argc, char **argv) {
+//	int port = 9090;
+//	boost::shared_ptr<SimilarityJoinServiceHandler> handler(new SimilarityJoinServiceHandler());
+//	boost::shared_ptr<TProcessor> processor(new SimilarityJoinServiceProcessor(handler));
+//	boost::shared_ptr<TServerTransport> serverTransport(new TServerSocket(port));
+//	boost::shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
+//	boost::shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
+//
+//	TSimpleServer server(processor, serverTransport, transportFactory, protocolFactory);
+//	server.serve();
+//	return 0;
+//}
+
+
 int main(int argc, char **argv) {
-	int port = 9090;
+	int port = 19191;
+
 	boost::shared_ptr<SimilarityJoinServiceHandler> handler(new SimilarityJoinServiceHandler());
 	boost::shared_ptr<TProcessor> processor(new SimilarityJoinServiceProcessor(handler));
 	boost::shared_ptr<TServerTransport> serverTransport(new TServerSocket(port));
 	boost::shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
 	boost::shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
 
-	TSimpleServer server(processor, serverTransport, transportFactory, protocolFactory);
-	server.serve();
+
+	//#define DEF_USE_THREADPOOL
+#ifdef DEF_USE_THREADPOOL
+	const int workerCount = 500;
+	boost::shared_ptr<ThreadManager> threadManager = ThreadManager::newSimpleThreadManager(workerCount);
+	boost::shared_ptr<PosixThreadFactory> threadFactory = boost::shared_ptr<PosixThreadFactory>(new PosixThreadFactory());
+	threadManager->threadFactory(threadFactory);
+	threadManager->start();
+	TThreadPoolServer server(processor, serverTransport, transportFactory, protocolFactory, threadManager);
+#else
+	TThreadedServer server(processor, serverTransport, transportFactory, protocolFactory);
+#endif
+	try
+	{
+		server.serve();
+	}
+	catch (TException& tx) {
+		cout << "ERROR: " << tx.what() << endl;
+	}
+
 	return 0;
 }
+
 
