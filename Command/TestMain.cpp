@@ -543,15 +543,6 @@ int main(int argc, char **argv)
                 arLsh[uiCur] = new uint32_t[uiLshL];
                 lsh.Compute(arMetaVal[uiCur], arLsh[uiCur]);
 
-				//TODEL
-				if (uiCur == 0)
-				{
-					cout << "uiDataDimension" << uiDataDimension << endl;
-					for (int i = 0; i < uiDataDimension; i++)
-					{
-						cout << arLsh[uiCur][i] << " ";
-					}
-				}
             }
 
             uint32_t uiTimeCost = TimeDiff::DiffTimeInMicroSecond();
