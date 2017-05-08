@@ -5,17 +5,14 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Admin : System.Web.UI.MasterPage
+public partial class query : System.Web.UI.Page
 {
-
-    public PageInfo pageInfo;
-
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (!IsPostBack)
+        {
 
-        if (!IsPostBack) {
-
-            pageInfo = WebHelper.GetPageInfo(this);
+            WebHelper.GetPageInfo(this).PageTag = WebConfig.QueryPageTag;
 
         }
     }

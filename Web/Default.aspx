@@ -26,23 +26,23 @@
                 <h1 class="logo-name">ITF</h1>
 
             </div>
-            <h3>欢迎使用CyberX医院管理示例</h3>
+            <h3>Welcome to Financial Demo</h3>
             <p>
-                我们的医院管理系统使用BlindDB加密数据库，所有的敏感数据都已进行加密处理。
+                By the technique of similarity join, we can find a group of people which has similarity features with the specified group.
             </p>
-            <p>请输入用户名与密码，使用不同角色进入系统</p>
+            <p>Login in. To see it in action.</p>
             <form class="m-t" role="form" action="index.aspx">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="用户名" required="" />
+                    <input type="text" name="user" class="form-control" placeholder="User" required="" />
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="密码" required="" />
+                    <input type="password" class="form-control" placeholder="Password" required="" />
                 </div>
-                <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
+                <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
 
-                <a href="#"><small>忘记密码 ？</small></a>
+                <a href="#"><small>Forget password ?</small></a>
             </form>
-            <p class="m-t"> <small>医院管理系统 | CyberX Tech Limited 版权所有 &copy; 2017</small> </p>
+            <p class="m-t"> <small>Similarity Join Demo | ITF Project 版权所有 &copy; 2017</small> </p>
         </div>
     </div>
 
