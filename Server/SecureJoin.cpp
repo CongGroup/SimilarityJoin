@@ -291,9 +291,9 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 
 	for (int i = 0; i < uiJoinNum; i++)
 	{
-		delete[]queryLsh[i];
+		delete[] queryLsh[i];
 	}
-	delete[]queryLsh;
+	delete[] queryLsh;
 	return vecRes;
 
 }

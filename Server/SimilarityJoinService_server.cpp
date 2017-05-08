@@ -126,12 +126,12 @@ public:
 		}
 
 		_return = joinEngine.joinByStrategy1(buffer, Datas.size(), ThresholdK);
-
+		/*
 		for (int i = 0; i < Datas.size(); i++)
 		{
 			delete[]buffer[i];
 		}
-		delete[] buffer;
+		delete[] buffer;*/
 	}
 
 	void JoinByStrategy2(std::vector<int32_t> & _return, const std::vector<std::string> & Datas, const int32_t ThresholdK, const int32_t TimeOut) {
