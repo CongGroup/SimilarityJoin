@@ -226,6 +226,10 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 
 	set<uint32_t> setResult;
 	markSecond();
+	uint32_t a, b;
+	char buf[32];
+	PRF::Sha256((char*)&a, sizeof(uint32_t), (char*)&b, sizeof(uint32_t), buf, 32);
+	cout << "countA successful" << endl;
 
 	uint32_t **queryLsh = new uint32_t*[uiJoinNum];
 	for (int i = 0; i < uiJoinNum; i++)
