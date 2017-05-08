@@ -371,10 +371,10 @@ ostream& operator << (ostream& out, const Proportion& por)
 {
 	cout.setf(ios::right);
 	cout << "Total " << setw(6) << por.total << endl;
-	cout << "Type D" << setw(6) << por.counter[0] << "  , percentage is " << setw(4) << (por.counter[0] + .0)/por.total<<endl;
-	cout << "Type B" << setw(6) << por.counter[1] << "  , percentage is " << setw(4) << (por.counter[0] + .0)/por.total<<endl;
-	cout << "Type C" << setw(6) << por.counter[2] << "  , percentage is " << setw(4) << (por.counter[0] + .0)/por.total<<endl;
-	cout << "Type D" << setw(6) << por.counter[3] << "  , percentage is " << setw(4) << (por.counter[0] + .0)/por.total<<endl;
+	cout << "Type A" << setw(6) << por.counter[0] << "  , percentage is " << setw(4) << (por.counter[0] + .0)/por.total<<endl;
+	cout << "Type B" << setw(6) << por.counter[1] << "  , percentage is " << setw(4) << (por.counter[1] + .0)/por.total<<endl;
+	cout << "Type C" << setw(6) << por.counter[2] << "  , percentage is " << setw(4) << (por.counter[2] + .0)/por.total<<endl;
+	cout << "Type D" << setw(6) << por.counter[3] << "  , percentage is " << setw(4) << (por.counter[3] + .0)/por.total<<endl;
 	cout.unsetf(ios::right);
 	return out;
 }
@@ -477,7 +477,7 @@ int main(int argc, char **argv)
             cout << "Begin to Load data from [ " << strPath.c_str() << " ]" << endl;
             cout << "The dimension is [ " << uiDataDimension << " ]" << endl;
 
-            cout << "Begin to Work" << endl;
+
 
             uiAllNum = countLines(strPath);
 
@@ -489,6 +489,7 @@ int main(int argc, char **argv)
 
             cout << "The dataset contains : [ " << uiAllNum << " ] records" << endl;
 
+			cout << "Begin to Work" << endl;
             //Init memory
             arMetaVal = new double*[uiAllNum];
 
@@ -507,8 +508,9 @@ int main(int argc, char **argv)
 
             cout << "Finish Read data" << endl;
 
-            string sInput = PrintAndGet<string>("Press 1 to modify params. Press others use defaults params\n e.g.  D = 102   L = 250   W = 1.5");
-            uiUseDimension = 102;
+            //string sInput = PrintAndGet<string>("Press 1 to modify params. Press others use defaults params\n e.g.  D = 102   L = 250   W = 1.5");
+			string sInput = "2";
+			uiUseDimension = 102;
             uiLshL = 250;
             dLshW = 1.5;
 
@@ -601,6 +603,13 @@ int main(int argc, char **argv)
                 myfile.close();
 
             }
+			
+			cout << "Finish compute all information:" << endl;
+			cout << "uiAllNum = " << uiAllNum << endl;
+			cout << "uiLshL = " << uiLshL << endl;
+			cout << "uiLshW = " << dLshW << endl;
+			cout << "uiDataDimension = " << uiDataDimension << endl;
+			cout << "uiUseDimension = " << uiUseDimension << endl;
 
             break;
         }
@@ -929,7 +938,7 @@ int main(int argc, char **argv)
 
 
             }
-			cout << "Query time is " << TimeDiff::DiffTimeInSecond() << "second" << endl;
+			cout << "Query time is " << TimeDiff::DiffTimeInSecond() << " second" << endl;
             cout << "ulNeedBandwidthNum = " << ulNeedBandwidthNum << endl;
 			//NEW
 			por = countLevel(arMetaVal, setResultInJoin);
@@ -1016,7 +1025,7 @@ int main(int argc, char **argv)
 
             }
 
-            cout << "Query time is "<< TimeDiff::DiffTimeInSecond()<<"second" << endl;
+            cout << "Query time is "<< TimeDiff::DiffTimeInSecond()<<" second" << endl;
             cout << "ulNeedBandwidthNum = " << ulNeedBandwidthNum << endl;
             cout << "uiHitCache = " << uiHitCache << endl;
             cout << "ulSaveResultNum = " << ulSaveResultNum << endl;
