@@ -83,16 +83,16 @@ void PrintCmdList() {
 	cout << "  || 1 Process Data, compute the informations, dump to files. " << endl;
 	cout << "  || 2 Load the Processed Data and informations from files." << endl;
 	cout << "  =====================================================" << endl << "  ||" << endl;
-	cout << "  || 3 [ Part 1 ] Build index time cost" << endl;
-	cout << "  || 4 [ Part 2 ] Per token process time" << endl;
-	cout << "  || 5 [ Part 3 ] Strategy I Latency CDF" << endl;
-	cout << "  || 6 [ Part 3 ] Strategy II Latency CDF" << endl;
-	cout << "  || 7 [ Part 4, 5 ] Strategy I Join Time" << endl;
-	cout << "  || 8 [ Part 4, 5 ] Strategy II Join Time" << endl;
-	cout << "  || 9 [ Part 6 ] Strategy I, II Join Accuracy" << endl;
-	cout << "  || a [ Part 6 ] Strategy III Join Accuracy" << endl;
-	cout << "  || b [ Part 4, 5 ] Strategy III Join Time" << endl;
-	cout << "  || c [ Part 7 ] Strategy III Security Distribution" << endl;
+	cout << "  || 3  Build index time cost" << endl;
+	cout << "  || 4  Per token process time" << endl;
+	cout << "  || 5  Strategy I Latency CDF" << endl;
+	cout << "  || 6  Strategy II Latency CDF" << endl;
+	cout << "  || 7¡ïStrategy I Join Time" << endl;
+	cout << "  || 8¡ïStrategy II Join Time" << endl;
+	cout << "  || 9  Strategy I, II Join Accuracy" << endl;
+	cout << "  || a  Strategy III Join Accuracy" << endl;
+	cout << "  || b¡ïStrategy III Join Time" << endl;
+	cout << "  || c  Strategy III Security Distribution" << endl;
 
 
 	cout << "  ||  " << endl;
@@ -371,10 +371,10 @@ ostream& operator << (ostream& out, const Proportion& por)
 {
 	cout.setf(ios::right);
 	cout << "Total " << setw(6) << por.total << endl;
-	cout << "Type A" << setw(6) << por.counter[0] << "  , percentage is " << setw(4) << 100 * (por.counter[0] + .0) / por.total << "%" << endl;
-	cout << "Type B" << setw(6) << por.counter[1] << "  , percentage is " << setw(4) << 100 * (por.counter[1] + .0) / por.total << "%" << endl;
-	cout << "Type C" << setw(6) << por.counter[2] << "  , percentage is " << setw(4) << 100 * (por.counter[2] + .0) / por.total << "%" << endl;
-	cout << "Type D" << setw(6) << por.counter[3] << "  , percentage is " << setw(4) << 100 * (por.counter[3] + .0) / por.total << "%" << endl;
+	cout << "Type A" << setw(6) << por.counter[0] << "  , percentage is " << setw(12) << 100 * (por.counter[0] + .0) / por.total << "%" << endl;
+	cout << "Type B" << setw(6) << por.counter[1] << "  , percentage is " << setw(12) << 100 * (por.counter[1] + .0) / por.total << "%" << endl;
+	cout << "Type C" << setw(6) << por.counter[2] << "  , percentage is " << setw(12) << 100 * (por.counter[2] + .0) / por.total << "%" << endl;
+	cout << "Type D" << setw(6) << por.counter[3] << "  , percentage is " << setw(12) << 100 * (por.counter[3] + .0) / por.total << "%" << endl;
 	cout.unsetf(ios::right);
 	return out;
 }
@@ -388,7 +388,7 @@ Proportion& operator +=(Proportion& self, const Proportion& por)
 	}
 }
 
-//"Input the test Type, 1 means A, \
+//"Please pick a subset for join. Input the type to filter the victims. 1 means A, \
 2 means B, 3 means C, 4 means D, other means mix"
 bool filterType(double* pMateData, uint32_t chooseType)
 {
@@ -747,7 +747,7 @@ int main(int argc, char **argv)
 
 			Proportion por = countLevel(arMetaVal, uiTestNum);
 			cout << "In the test sample. " << por << endl;
-			uint32_t uiLimitLevel = PrintAndGet<uint32_t>("Input the test Type, 1 means A, \
+			uint32_t uiLimitLevel = PrintAndGet<uint32_t>("Please pick a subset for join. Input the type to filter the victims. 1 means A, \
 2 means B, 3 means C, 4 means D, other means mix");
 
 			for (uint32_t uiCur = 0; uiCur < uiTestNum; uiCur++)
@@ -812,7 +812,7 @@ int main(int argc, char **argv)
 
 			Proportion por = countLevel(arMetaVal, uiTestNum);
 			cout << "In the test sample. " << por << endl;
-			uint32_t uiLimitLevel = PrintAndGet<uint32_t>("Input the test Type, 1 means A, \
+			uint32_t uiLimitLevel = PrintAndGet<uint32_t>("Please pick a subset for join. Input the type to filter the victims. 1 means A, \
 2 means B, 3 means C, 4 means D, other means mix");
 
 			for (uint32_t uiCur = 0; uiCur < uiTestNum; uiCur++)
@@ -879,7 +879,7 @@ int main(int argc, char **argv)
 			//double dPercent = PrintAndGet<double>("please input your self join percent. e.g. 0.1 (10%)  0.2 (20%)");
 			//uint32_t uiJoinNum = uiAllNum * dPercent;
 
-			uint32_t uiJoinNum = PrintAndGet<uint32_t>("please input your self join count. e.g. 10");
+			uint32_t uiJoinNum = PrintAndGet<uint32_t>("Please input a number for randomly pick. e.g. 10");
 
 			cout << "The number need to join is " << uiJoinNum << endl;
 			uint64_t ulNeedBandwidthNum = 0;
@@ -890,7 +890,7 @@ int main(int argc, char **argv)
 			set<uint32_t> setResultInJoin;
 			Proportion por = countLevel(arMetaVal, uiJoinNum);
 			cout << "In query records. " << endl << por << endl;
-			uint32_t uiLimitLevel = PrintAndGet<uint32_t>("Input the test Type, 1 means A, 2 means B, 3 means C, 4 means D, other means mix");
+			uint32_t uiLimitLevel = PrintAndGet<uint32_t>("Please pick a subset for join. Input the type to filter the victims. 1 means A, 2 means B, 3 means C, 4 means D, other means mix");
 
 			TimeDiff::DiffTimeInSecond();
 			for (uint32_t uiCur = 0; uiCur < uiJoinNum; uiCur++)
@@ -952,7 +952,7 @@ int main(int argc, char **argv)
 
 			//double dPercent = PrintAndGet<double>("please input your self join percent. e.g. 0.1 (10%)  0.2 (20%)");
 			//uint32_t uiJoinNum = uiAllNum * dPercent;
-			uint32_t uiJoinNum = PrintAndGet<uint32_t>("please input your self join count. e.g. 10");
+			uint32_t uiJoinNum = PrintAndGet<uint32_t>("Please input a number for randomly pick. e.g. 10");
 
 			//uint32_t uiLimitK = PrintAndGet<uint32_t>("Input the Threshold K to get the list.");
 			uint32_t uiLimitK = 88;
@@ -968,7 +968,7 @@ int main(int argc, char **argv)
 
 			Proportion por = countLevel(arMetaVal, uiJoinNum);
 			cout << "In query records. " << endl << por << endl;
-			uint32_t uiLimitLevel = PrintAndGet<uint32_t>("Input the test Type, 1 means A, 2 means B, 3 means C, 4 means D, other means mix");
+			uint32_t uiLimitLevel = PrintAndGet<uint32_t>("Please pick a subset for join. Input the type to filter the victims. 1 means A, 2 means B, 3 means C, 4 means D, other means mix");
 
 			TimeDiff::DiffTimeInSecond();
 			for (uint32_t uiCur = 0; uiCur < uiJoinNum; uiCur++)
@@ -1171,13 +1171,13 @@ int main(int argc, char **argv)
 			//SelfQuery
 			//double dPercent = PrintAndGet<double>("please input your self join percent. e.g. 0.1 (10%)  0.2 (20%)");
 			//uint32_t uiJoinNum = uiAllNum * dPercent;
-			uint32_t uiJoinNum = PrintAndGet<uint32_t>("please input your self join count. e.g. 10");
+			uint32_t uiJoinNum = PrintAndGet<uint32_t>("Please input a number for randomly pick. e.g. 10");
 
 			cout << "The number need to join is " << uiJoinNum << endl;
 
 			Proportion por = countLevel(arMetaVal, uiJoinNum);
 			cout << "In query records. " << endl << por << endl;
-			uint32_t uiLimitLevel = PrintAndGet<uint32_t>("Input the test Type, 1 means A, 2 means B, 3 means C, 4 means D, other means mix");
+			uint32_t uiLimitLevel = PrintAndGet<uint32_t>("Please pick a subset for join. Input the type to filter the victims. 1 means A, 2 means B, 3 means C, 4 means D, other means mix");
 
 
 			//Init Join vector
