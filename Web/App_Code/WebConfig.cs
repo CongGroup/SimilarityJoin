@@ -19,4 +19,7 @@ public class WebConfig
 
     public static string ServerIP = "127.0.0.1";
     public static int ServerPort = 9090;
+
+    public static int FinancialKind = 4;
+
 }
