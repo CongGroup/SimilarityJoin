@@ -66,6 +66,7 @@ public:
 
     void ShowBukHashState()
     {
+		m_bukHash.GetRealNum();
         m_bukHash.PrintState();
     }
 

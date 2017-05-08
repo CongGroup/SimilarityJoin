@@ -208,7 +208,7 @@ public:
 
 
 int main(int argc, char **argv) {
-	int port = 19191;
+	int port = 9090;
 
 	boost::shared_ptr<SimilarityJoinServiceHandler> handler(new SimilarityJoinServiceHandler());
 	boost::shared_ptr<TProcessor> processor(new SimilarityJoinServiceProcessor(handler));
