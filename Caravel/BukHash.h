@@ -45,7 +45,11 @@ public:
         if (0 == uiSum)
         {
             //无法创建质数数组
-            sErr = "ERROR : Can 't Create Prime Array, the width is "<<uiW<<" L is "<<uiL<<".";
+
+			sErr = "ERROR : Can 't Create Prime Array, the width is ";
+			sErr.append(to_string(uiW));
+			sErr.append(" L is ");
+			sErr.append(to_string(uiL));
             return false;
         }
         m_uiAllNum = uiSum;
@@ -55,7 +59,8 @@ public:
         //Get Shm Memory
         if (!ShmCtl::GetShm(&m_pHead, kKey, m_sizMem))
         {
-            sErr = "ERROR : Get Shm False, key is kKey, size is m_sizMem!";
+			sErr = "ERROR : Get Shm False, key is kKey, size is ";
+			sErr.append(to_string(m_sizMem));
             return false;
         }
         //Init Data
