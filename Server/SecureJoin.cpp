@@ -16,11 +16,12 @@ using namespace caravel;
 SecureJoin::SecureJoin()
 {
 	init();
+	markSecond();
 }
 
 SecureJoin::~SecureJoin()
 {
-	//free();
+	free();
 }
 
 int SecureJoin::init()
@@ -128,6 +129,17 @@ bool SecureJoin::computeLSH(uint32_t L, double w)
 	{
 		arLsh[uiCur] = new uint32_t[uiLshL];
 		c2lsh.Compute(arMetaVal[uiCur], arLsh[uiCur]);
+		
+
+		//TODEL
+		if (uiCur == 0)
+		{
+			cout << "uiDataDimension" << uiDataDimension << endl;
+			for (int i = 0; i < uiDataDimension; i++)
+			{
+				cout << arLsh[uiCur][i] << " ";
+			}
+		}
 	}
 
 	return true;
@@ -227,12 +239,15 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 	set<uint32_t> setResult;
 	markSecond();
 
+	cout << "uiJoinNum" << uiJoinNum << "uiDataDimension" << uiDataDimension << endl;
+
 	uint32_t **queryLsh = new uint32_t*[uiJoinNum];
 	for (int i = 0; i < uiJoinNum; i++)
 	{
 		queryLsh[i] = new uint32_t[uiDataDimension];
 		computeLsh(queryLsh[i], joinMataData[i]);
 	}
+
 
 	for (uint32_t uiCur = 0; uiCur < uiJoinNum; uiCur++)
 	{
@@ -244,6 +259,8 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 			uint32_t uiLsh = arQueryLsh[uiL];
 			encIndex.QueryOne(uiLsh, uiL, vecResult);
 		}
+		//cout << "about Self" << endl;
+		//abort();
 
 		map<uint32_t, uint32_t> mapCombine;
 		vector<uint32_t> vecResultInK;
@@ -274,9 +291,9 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 
 	for (int i = 0; i < uiJoinNum; i++)
 	{
-		delete[]queryLsh[i];
+		delete[] queryLsh[i];
 	}
-	delete[]queryLsh;
+	delete[] queryLsh;
 	return vecRes;
 
 }
@@ -628,7 +645,7 @@ char SecureJoin::Type2c(int lvl)
 
 int SecureJoin::markSecond()
 {
-	static time_t t_cur;
+	static time_t t_cur(0);
 	uint32_t ui_Time = time(NULL) - t_cur;
 	t_cur = time(NULL);
 

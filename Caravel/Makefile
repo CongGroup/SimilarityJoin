@@ -4,7 +4,7 @@ DEST_LIB=libcaravel.a
 SRC=$(wildcard *.cpp)
 OBJ=$(SRC:.cpp=.o)
 INC=-I/usr/local/include
-FLAGS=-Wall -fpermissive -g -std=c++11 -O3
+FLAGS=-Wall -fpermissive -g -std=c++11
 RM=-rm -f
 
 .PHONY: all clean

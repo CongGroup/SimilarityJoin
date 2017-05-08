@@ -126,12 +126,12 @@ public:
 		}
 
 		_return = joinEngine.joinByStrategy1(buffer, Datas.size(), ThresholdK);
-
+		/*
 		for (int i = 0; i < Datas.size(); i++)
 		{
 			delete[]buffer[i];
 		}
-		delete[] buffer;
+		delete[] buffer;*/
 	}
 
 	void JoinByStrategy2(std::vector<int32_t> & _return, const std::vector<std::string> & Datas, const int32_t ThresholdK, const int32_t TimeOut) {
@@ -194,50 +194,50 @@ public:
 
 };
 
-//int main(int argc, char **argv) {
-//	int port = 9090;
-//	boost::shared_ptr<SimilarityJoinServiceHandler> handler(new SimilarityJoinServiceHandler());
-//	boost::shared_ptr<TProcessor> processor(new SimilarityJoinServiceProcessor(handler));
-//	boost::shared_ptr<TServerTransport> serverTransport(new TServerSocket(port));
-//	boost::shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
-//	boost::shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
-//
-//	TSimpleServer server(processor, serverTransport, transportFactory, protocolFactory);
-//	server.serve();
-//	return 0;
-//}
-
-
 int main(int argc, char **argv) {
 	int port = 9090;
-
 	boost::shared_ptr<SimilarityJoinServiceHandler> handler(new SimilarityJoinServiceHandler());
 	boost::shared_ptr<TProcessor> processor(new SimilarityJoinServiceProcessor(handler));
 	boost::shared_ptr<TServerTransport> serverTransport(new TServerSocket(port));
 	boost::shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
 	boost::shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
 
-
-	//#define DEF_USE_THREADPOOL
-#ifdef DEF_USE_THREADPOOL
-	const int workerCount = 500;
-	boost::shared_ptr<ThreadManager> threadManager = ThreadManager::newSimpleThreadManager(workerCount);
-	boost::shared_ptr<PosixThreadFactory> threadFactory = boost::shared_ptr<PosixThreadFactory>(new PosixThreadFactory());
-	threadManager->threadFactory(threadFactory);
-	threadManager->start();
-	TThreadPoolServer server(processor, serverTransport, transportFactory, protocolFactory, threadManager);
-#else
-	TThreadedServer server(processor, serverTransport, transportFactory, protocolFactory);
-#endif
-	try
-	{
-		server.serve();
-	}
-	catch (TException& tx) {
-		cout << "ERROR: " << tx.what() << endl;
-	}
-
+	TSimpleServer server(processor, serverTransport, transportFactory, protocolFactory);
+	server.serve();
 	return 0;
 }
 
 
+//int main(int argc, char **argv) {
+//	int port = 9090;
+//
+//	boost::shared_ptr<SimilarityJoinServiceHandler> handler(new SimilarityJoinServiceHandler());
+//	boost::shared_ptr<TProcessor> processor(new SimilarityJoinServiceProcessor(handler));
+//	boost::shared_ptr<TServerTransport> serverTransport(new TServerSocket(port));
+//	boost::shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
+//	boost::shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
+//
+//
+//	//#define DEF_USE_THREADPOOL
+//#ifdef DEF_USE_THREADPOOL
+//	const int workerCount = 500;
+//	boost::shared_ptr<ThreadManager> threadManager = ThreadManager::newSimpleThreadManager(workerCount);
+//	boost::shared_ptr<PosixThreadFactory> threadFactory = boost::shared_ptr<PosixThreadFactory>(new PosixThreadFactory());
+//	threadManager->threadFactory(threadFactory);
+//	threadManager->start();
+//	TThreadPoolServer server(processor, serverTransport, transportFactory, protocolFactory, threadManager);
+//#else
+//	TThreadedServer server(processor, serverTransport, transportFactory, protocolFactory);
+//#endif
+//	try
+//	{
+//		server.serve();
+//	}
+//	catch (TException& tx) {
+//		cout << "ERROR: " << tx.what() << endl;
+//	}
+//
+//	return 0;
+//}
+//
+//
