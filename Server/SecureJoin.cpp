@@ -129,17 +129,6 @@ bool SecureJoin::computeLSH(uint32_t L, double w)
 	{
 		arLsh[uiCur] = new uint32_t[uiLshL];
 		c2lsh.Compute(arMetaVal[uiCur], arLsh[uiCur]);
-		
-
-		//TODEL
-		if (uiCur == 0)
-		{
-			cout << "uiDataDimension" << uiDataDimension << endl;
-			for (int i = 0; i < uiDataDimension; i++)
-			{
-				cout << arLsh[uiCur][i] << " ";
-			}
-		}
 	}
 
 	return true;

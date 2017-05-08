@@ -7,9 +7,12 @@
 #include <map>
 #include <set>
 #include <vector>
+#include <iomanip>
+
 //getch
 #include <termios.h>
 #include <unistd.h>
+
 
 #include "../Caravel/BukHash.h"
 #include "../Caravel/ShmCtl.h"
@@ -366,11 +369,13 @@ Proportion countLevel(double** pArrMateData, const set<uint32_t>& ids)
 
 ostream& operator << (ostream& out, const Proportion& por)
 {
-	out << "There total " << por.total << " records: ";
-	out << por.counter[0] << " is Type A, ";
-	out << por.counter[1] << " is Type B, ";
-	out << por.counter[2] << " is Type C, ";
-	out << por.counter[3] << " is Type D.";
+	cout.setf(ios::right);
+	cout << "Total " << setw(6) << por.total << endl;
+	cout << "Type D" << setw(6) << por.counter[0] << "  , percentage is " << setw(4) << (por.counter[0] + .0)/por.total<<endl;
+	cout << "Type B" << setw(6) << por.counter[1] << "  , percentage is " << setw(4) << (por.counter[0] + .0)/por.total<<endl;
+	cout << "Type C" << setw(6) << por.counter[2] << "  , percentage is " << setw(4) << (por.counter[0] + .0)/por.total<<endl;
+	cout << "Type D" << setw(6) << por.counter[3] << "  , percentage is " << setw(4) << (por.counter[0] + .0)/por.total<<endl;
+	cout.unsetf(ios::right);
 	return out;
 }
 
@@ -464,9 +469,10 @@ int main(int argc, char **argv)
             //Before use the data use sed -i 's/,/\t/g' covtype.data to replace the "," to "\t".
 
             //1
-            string strPath = PrintAndGet<string>("Please input the Path of the dataset [ Then Press Enter ]\n e.g.  covtype.data   MiniBooNE_PID.txt");
+            string strPath = PrintAndGet<string>("Please input the Path of the dataset [ Then Press Enter ]\n e.g.  financeNormalize.data");
 
-            uiDataDimension = PrintAndGet<uint32_t>("Please input the Dimension of the dataset. [ Then Press Enter ]\n e.g.  covtype.data is 10 dimension. \n MiniBooNE_PID.txt is 50 dimension.");
+            //uiDataDimension = PrintAndGet<uint32_t>("Please input the Dimension of the dataset. [ Then Press Enter ]\n e.g.  covtype.data is 10 dimension. \n MiniBooNE_PID.txt is 50 dimension.");
+			uiDataDimension = 102;
 
             cout << "Begin to Load data from [ " << strPath.c_str() << " ]" << endl;
             cout << "The dimension is [ " << uiDataDimension << " ]" << endl;
@@ -495,19 +501,16 @@ int main(int argc, char **argv)
                 for (uint32_t uiD = 0; uiD < uiDataDimension; uiD++)
                 {
                     ifs >> arMetaVal[uiCur][uiD];
-                    //cout << arMetaVal[uiCur][uiD] << " ";
                 }
             }
-
-
             ifs.close();
 
             cout << "Finish Read data" << endl;
 
-            string sInput = PrintAndGet<string>("Press 1 to modify params. Press others use defaults params\n e.g.  D = 10   L = 300   W = 0.3");
-            uiUseDimension = 10;
-            uiLshL = 300;
-            dLshW = 0.3;
+            string sInput = PrintAndGet<string>("Press 1 to modify params. Press others use defaults params\n e.g.  D = 102   L = 250   W = 1.5");
+            uiUseDimension = 102;
+            uiLshL = 250;
+            dLshW = 1.5;
 
             if (sInput == "1")
             {
@@ -550,8 +553,9 @@ int main(int argc, char **argv)
 
             //Save the data
 
-            sInput = PrintAndGet<string>("Press 1 to save data to files. [ overwrite if exists ]");
-            if ("1" == sInput)
+            //sInput = PrintAndGet<string>("Press 1 to save data to files. [ overwrite if exists ]");
+			sInput = "2";
+			if ("1" == sInput)
             {
                 cout << "Begin to write data to files" << endl;
 
@@ -604,7 +608,7 @@ int main(int argc, char **argv)
         {
             //2 Load data
 
-            string sInput = PrintAndGet<string>("Press a name to load files. ");
+            string sInput = PrintAndGet<string>("Press a name to load files. eg: lsh");
 
             ifstream myfile;
             myfile.open(sInput.c_str(), ios::in);
@@ -863,21 +867,21 @@ int main(int argc, char **argv)
         {
             //7 [ Part 4 ] Strategy I Join Time
 
-            double dPercent = PrintAndGet<double>("please input your self join percent. e.g. 0.1 (10%)  0.2 (20%)");
+            //double dPercent = PrintAndGet<double>("please input your self join percent. e.g. 0.1 (10%)  0.2 (20%)");
+            //uint32_t uiJoinNum = uiAllNum * dPercent;
 
-            uint32_t uiJoinNum = uiAllNum * dPercent;
+			uint32_t uiJoinNum = PrintAndGet<uint32_t>("please input your self join count. e.g. 10");
 
             cout << "The number need to join is " << uiJoinNum << endl;
-            cout << "the time is seconds." << endl;
             uint64_t ulNeedBandwidthNum = 0;
 
-            uint32_t uiLimitK = PrintAndGet<uint32_t>("Input the Threshold K to get the list.");
+            //uint32_t uiLimitK = PrintAndGet<uint32_t>("Input the Threshold K to get the list.");
+			uint32_t uiLimitK = 88;
 
 			set<uint32_t> setResultInJoin;
 			Proportion por = countLevel(arMetaVal, uiJoinNum);
-			cout << "In the test sample. " << por << endl;
-			uint32_t uiLimitLevel = PrintAndGet<uint32_t>("Input the test Type, 1 means A, \
-2 means B, 3 means C, 4 means D, other means mix");
+			cout << "In query records. " <<endl << por << endl;
+			uint32_t uiLimitLevel = PrintAndGet<uint32_t>("Input the test Type, 1 means A, 2 means B, 3 means C, 4 means D, other means mix");
 
             TimeDiff::DiffTimeInSecond();
             for (uint32_t uiCur = 0; uiCur < uiJoinNum; uiCur++)
@@ -925,14 +929,11 @@ int main(int argc, char **argv)
 
 
             }
-            cout << TimeDiff::DiffTimeInSecond() << endl;
+			cout << "Query time is " << TimeDiff::DiffTimeInSecond() << "second" << endl;
             cout << "ulNeedBandwidthNum = " << ulNeedBandwidthNum << endl;
 			//NEW
-			cout << "Process get setResultInJoin size is " << setResultInJoin.size() << endl;
 			por = countLevel(arMetaVal, setResultInJoin);
-			cout << "Head of this result is ";
-			printSetHeadId(setResultInJoin, 20);
-			cout << "In the test resultSet. " << por << endl;
+			cout << "In result records."<<endl << por << endl;
 
             break;
         }
@@ -940,14 +941,14 @@ int main(int argc, char **argv)
         {
             //8 [ Part 4 ] Strategy II Join Time
 
-            double dPercent = PrintAndGet<double>("please input your self join percent. e.g. 0.1 (10%)  0.2 (20%)");
+            //double dPercent = PrintAndGet<double>("please input your self join percent. e.g. 0.1 (10%)  0.2 (20%)");
+            //uint32_t uiJoinNum = uiAllNum * dPercent;
+			uint32_t uiJoinNum = PrintAndGet<uint32_t>("please input your self join count. e.g. 10");
 
-            uint32_t uiJoinNum = uiAllNum * dPercent;
-
-            uint32_t uiLimitK = PrintAndGet<uint32_t>("Input the Threshold K to get the list.");
+            //uint32_t uiLimitK = PrintAndGet<uint32_t>("Input the Threshold K to get the list.");
+			uint32_t uiLimitK = 88;
 
             cout << "The number need to join is " << uiJoinNum << endl;
-            cout << "the time is seconds." << endl;
             uint64_t ulNeedBandwidthNum = 0;
 
             map<uint32_t, map<uint32_t, vector<uint32_t> > >mapCacheResult;
@@ -957,9 +958,8 @@ int main(int argc, char **argv)
 			set<uint32_t> setResultInJoin;
 
 			Proportion por = countLevel(arMetaVal, uiJoinNum);
-			cout << "In the test sample. " << por << endl;
-			uint32_t uiLimitLevel = PrintAndGet<uint32_t>("Input the test Type, 1 means A, \
-2 means B, 3 means C, 4 means D, other means mix");
+			cout << "In query records. " << endl << por << endl;
+			uint32_t uiLimitLevel = PrintAndGet<uint32_t>("Input the test Type, 1 means A, 2 means B, 3 means C, 4 means D, other means mix");
 
 			TimeDiff::DiffTimeInSecond();
 			for (uint32_t uiCur = 0; uiCur < uiJoinNum; uiCur++)
@@ -1016,17 +1016,14 @@ int main(int argc, char **argv)
 
             }
 
-            cout << TimeDiff::DiffTimeInSecond() << endl;
+            cout << "Query time is "<< TimeDiff::DiffTimeInSecond()<<"second" << endl;
             cout << "ulNeedBandwidthNum = " << ulNeedBandwidthNum << endl;
             cout << "uiHitCache = " << uiHitCache << endl;
             cout << "ulSaveResultNum = " << ulSaveResultNum << endl;
 
 			//NEW
-			cout << "Process get setResultInJoin size is " << setResultInJoin.size() << endl;
 			por = countLevel(arMetaVal, setResultInJoin);
-			cout << "Head of this result is ";
-			printSetHeadId(setResultInJoin, 20);
-			cout << "In the test resultSet. " << por << endl;
+			cout << "In result records." << endl << por << endl;
 
             break;
         }
@@ -1163,11 +1160,16 @@ int main(int argc, char **argv)
             //b [ Part 4, 5 ] Strategy III Join Time
 
             //SelfQuery
-            double dPercent = PrintAndGet<double>("please input your self join percent. e.g. 0.1 (10%)  0.2 (20%)");
-
-            uint32_t uiJoinNum = uiAllNum * dPercent;
+            //double dPercent = PrintAndGet<double>("please input your self join percent. e.g. 0.1 (10%)  0.2 (20%)");
+            //uint32_t uiJoinNum = uiAllNum * dPercent;
+			uint32_t uiJoinNum = PrintAndGet<uint32_t>("please input your self join count. e.g. 10");
 
             cout << "The number need to join is " << uiJoinNum << endl;
+
+			Proportion por = countLevel(arMetaVal, uiJoinNum);
+			cout << "In query records. " << endl << por << endl;
+			uint32_t uiLimitLevel = PrintAndGet<uint32_t>("Input the test Type, 1 means A, 2 means B, 3 means C, 4 means D, other means mix");
+
 
             //Init Join vector
             vector<uint32_t> vecJoin;
@@ -1181,47 +1183,44 @@ int main(int argc, char **argv)
             SelfQuery(arMetaVal, uiAllNum, uiUseDimension, arLsh, uiLshL, dSelfQueryR, vecJoin, vecSelfQuery, uiSecurityK);
             cout << "Self query set = " << vecSelfQuery.size() << endl;
 
-            map<uint64_t, uint32_t> mapJoinQueryLsh;
-            uint64_t ulKey;
-            uint32_t *pKey = (uint32_t*)&ulKey;
-            for (vector<uint32_t>::iterator it = vecJoin.begin(); it != vecJoin.end(); it++)
-            {
-                for (uint32_t uiL = 0; uiL < uiLshL; uiL++)
-                {
-                    *pKey = arLsh[*it][uiL];
-                    *(pKey + 1) = uiL;
-                    mapJoinQueryLsh[ulKey]++;
-                }
-            }
-            //collect information
-            uint32_t uiDistinctJoinQueryLsh = 0;
-            uint32_t uiJoinQueryMaxLshCounter = 0;
-            uint32_t uiJoinQuerySumLshCounter = 0;
-            for (map<uint64_t, uint32_t>::iterator it = mapJoinQueryLsh.begin(); it != mapJoinQueryLsh.end(); it++)
-            {
-                uiDistinctJoinQueryLsh++;
-                uiJoinQuerySumLshCounter += it->second;
-                uiJoinQueryMaxLshCounter = uiJoinQueryMaxLshCounter > it->second ? uiJoinQueryMaxLshCounter : it->second;
-            }
-            cout << "uiDistinctJoinQueryLsh = " << uiDistinctJoinQueryLsh << endl;
-            cout << "uiJoinQueryMaxLshCounter = " << uiJoinQueryMaxLshCounter << endl;
-            cout << "uiJoinQuerySumLshCounter = " << uiJoinQuerySumLshCounter << endl;
+            //map<uint64_t, uint32_t> mapJoinQueryLsh;
+            //uint64_t ulKey;
+            //uint32_t *pKey = (uint32_t*)&ulKey;
+            //for (vector<uint32_t>::iterator it = vecJoin.begin(); it != vecJoin.end(); it++)
+            //{
+            //    for (uint32_t uiL = 0; uiL < uiLshL; uiL++)
+            //    {
+            //        *pKey = arLsh[*it][uiL];
+            //        *(pKey + 1) = uiL;
+            //        mapJoinQueryLsh[ulKey]++;
+            //    }
+            //}
+            ////collect information
+            //uint32_t uiDistinctJoinQueryLsh = 0;
+            //uint32_t uiJoinQueryMaxLshCounter = 0;
+            //uint32_t uiJoinQuerySumLshCounter = 0;
+            //for (map<uint64_t, uint32_t>::iterator it = mapJoinQueryLsh.begin(); it != mapJoinQueryLsh.end(); it++)
+            //{
+            //    uiDistinctJoinQueryLsh++;
+            //    uiJoinQuerySumLshCounter += it->second;
+            //    uiJoinQueryMaxLshCounter = uiJoinQueryMaxLshCounter > it->second ? uiJoinQueryMaxLshCounter : it->second;
+            //}
+            //cout << "uiDistinctJoinQueryLsh = " << uiDistinctJoinQueryLsh << endl;
+            //cout << "uiJoinQueryMaxLshCounter = " << uiJoinQueryMaxLshCounter << endl;
+            //cout << "uiJoinQuerySumLshCounter = " << uiJoinQuerySumLshCounter << endl;
 
             //Begin to join.
 
             cout << "The number need to join is " << vecSelfQuery.size() << endl;
-            cout << "the time is seconds." << endl;
+
             uint64_t ulNeedBandwidthNum = 0;
 
-            uint32_t uiLimitK = PrintAndGet<uint32_t>("Input the Threshold K to get the list.");
-
+            //uint32_t uiLimitK = PrintAndGet<uint32_t>("Input the Threshold K to get the list.");
+			uint32_t uiLimitK = 88;
 			set<uint32_t> setResultInJoin;
 
-			Proportion por = countLevel(arMetaVal, vecSelfQuery);
-			cout << "In the test sample. " << por << endl;
-			uint32_t uiLimitLevel = PrintAndGet<uint32_t>("Input the test Type, 1 means A, \
-2 means B, 3 means C, 4 means D, other means mix");
-
+			por = countLevel(arMetaVal, vecSelfQuery);
+			cout << "In self query records. " << endl << por << endl;
 
             TimeDiff::DiffTimeInSecond();
             for (uint32_t uiCur = 0; uiCur < vecSelfQuery.size(); uiCur++)
@@ -1273,11 +1272,8 @@ int main(int argc, char **argv)
             cout << "ulNeedBandwidthNum = " << ulNeedBandwidthNum << endl;
 
 			//NEW
-			cout << "Process get setResultInJoin size is " << setResultInJoin.size() << endl;
 			por = countLevel(arMetaVal, setResultInJoin);
-			cout << "Head of this result is ";
-			printSetHeadId(setResultInJoin, 20);
-			cout << "In the test resultSet. " << por << endl;
+			cout << "In result records. " << por << endl;
 
 
             break;
@@ -1425,8 +1421,8 @@ int main(int argc, char **argv)
             //A Test Create Index
             cout << "Process will create encrypted index." << endl;
 
-            key_t key = PrintAndGet<key_t>("Press a share memory key. if input 0 then the process will malloc memory to store the index. ");
-
+            //key_t key = PrintAndGet<key_t>("Press a share memory key. if input 0 then the process will malloc memory to store the index. ");
+			key_t key = 0;
             if (0 == key)
             {
                 cout << "Process will malloc memory to store the index." << endl;
@@ -1438,6 +1434,9 @@ int main(int argc, char **argv)
 
             cout << "All the dataset has " << uiAllNum << " records data." << endl;
             uiBuildIndexNum = PrintAndGet<uint32_t>("Please input the number you want to build into the index.");
+
+			Proportion por = countLevel(arMetaVal, uiBuildIndexNum);
+			cout << "In index records. " << endl << por << endl;
 
             encIndex.Init(uiBuildIndexNum * uiLshL, DEF_INDEX_LOAD, DEF_INDEX_FLOOR, key);
 
@@ -1458,9 +1457,9 @@ int main(int argc, char **argv)
                 uiAllCounterSum += it->second;
                 uiMaxCounter = uiMaxCounter > it->second ? uiMaxCounter : it->second;
             }
-            cout << "uiDistinctCounter = " << uiDistinctCounter << endl;
-            cout << "uiAllCounterSum = " << uiAllCounterSum << endl;
-            cout << "uiMaxCounter = " << uiMaxCounter << endl;
+            //cout << "uiDistinctCounter = " << uiDistinctCounter << endl;
+            //cout << "uiAllCounterSum = " << uiAllCounterSum << endl;
+            //cout << "uiMaxCounter = " << uiMaxCounter << endl;
 
             encIndex.ShowBukHashState();
 
@@ -1475,7 +1474,8 @@ int main(int argc, char **argv)
             key_t key = PrintAndGet<key_t>("Press an existed share memory key. Process will attach on the index on share memory.");
 
             cout << "All the dataset has " << uiAllNum << " records data." << endl;
-            uiBuildIndexNum = PrintAndGet<uint32_t>("Please input the number of the index items.");
+            //uiBuildIndexNum = PrintAndGet<uint32_t>("Please input the number of the index items.");
+			uiBuildIndexNum = uiAllNum;
 
             cout << "Attach the index on share memory whose key is " << key << endl;
 
