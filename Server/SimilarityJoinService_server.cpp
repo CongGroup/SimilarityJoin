@@ -6,6 +6,10 @@
 #include <thrift/server/TSimpleServer.h>
 #include <thrift/transport/TServerSocket.h>
 #include <thrift/transport/TBufferTransports.h>
+#include <thrift/concurrency/ThreadManager.h>
+#include <thrift/concurrency/PosixThreadFactory.h>
+#include <thrift/server/TThreadPoolServer.h>
+#include <thrift/server/TThreadedServer.h>
 
 #include "SecureJoin.h"
 
@@ -26,9 +30,9 @@ protected:
 public:
 	SimilarityJoinServiceHandler() 
 	{
-		string path = "financeMate.data";
+		string path = "financeNormalize.data";
 		userCount = joinEngine.loadData(path);
-		cout << "Load " << userCount << "data from" << path << endl;
+		cout << "Load " << userCount << " data from " << path << endl;
 		joinEngine.computeLSH(250, 1.5);
 		joinEngine.buildIndex(userCount);
 	}
@@ -96,8 +100,9 @@ public:
 	{
 		_return.push_back(to_string(joinEngine.uiUserNum));
 		_return.push_back(to_string(joinEngine.indexSize));
-		_return.push_back(to_string(joinEngine.indexMomery));
-		_return.push_back("16433180MB");
+		_return.push_back(to_string(joinEngine.indexMomery / 1024 / 1024));
+		//16433180Kb memory
+		_return.push_back(to_string(16433180/1024));
 	}
 
 	void JoinByStrategy1(std::vector<int32_t> & _return, const std::vector<std::string> & Datas, const int32_t ThresholdK, const int32_t TimeOut) {
@@ -189,16 +194,50 @@ public:
 
 };
 
+//int main(int argc, char **argv) {
+//	int port = 9090;
+//	boost::shared_ptr<SimilarityJoinServiceHandler> handler(new SimilarityJoinServiceHandler());
+//	boost::shared_ptr<TProcessor> processor(new SimilarityJoinServiceProcessor(handler));
+//	boost::shared_ptr<TServerTransport> serverTransport(new TServerSocket(port));
+//	boost::shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
+//	boost::shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
+//
+//	TSimpleServer server(processor, serverTransport, transportFactory, protocolFactory);
+//	server.serve();
+//	return 0;
+//}
+
+
 int main(int argc, char **argv) {
 	int port = 9090;
+
 	boost::shared_ptr<SimilarityJoinServiceHandler> handler(new SimilarityJoinServiceHandler());
 	boost::shared_ptr<TProcessor> processor(new SimilarityJoinServiceProcessor(handler));
 	boost::shared_ptr<TServerTransport> serverTransport(new TServerSocket(port));
 	boost::shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
 	boost::shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
 
-	TSimpleServer server(processor, serverTransport, transportFactory, protocolFactory);
-	server.serve();
+
+	//#define DEF_USE_THREADPOOL
+#ifdef DEF_USE_THREADPOOL
+	const int workerCount = 500;
+	boost::shared_ptr<ThreadManager> threadManager = ThreadManager::newSimpleThreadManager(workerCount);
+	boost::shared_ptr<PosixThreadFactory> threadFactory = boost::shared_ptr<PosixThreadFactory>(new PosixThreadFactory());
+	threadManager->threadFactory(threadFactory);
+	threadManager->start();
+	TThreadPoolServer server(processor, serverTransport, transportFactory, protocolFactory, threadManager);
+#else
+	TThreadedServer server(processor, serverTransport, transportFactory, protocolFactory);
+#endif
+	try
+	{
+		server.serve();
+	}
+	catch (TException& tx) {
+		cout << "ERROR: " << tx.what() << endl;
+	}
+
 	return 0;
 }
+
 

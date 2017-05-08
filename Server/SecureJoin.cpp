@@ -2,10 +2,12 @@
 #include <map>
 #include <time.h>
 #include <sstream>
+#include <sys/shm.h>
 
 #include "SecureJoin.h"
 #include "../Caravel/BukHash.h"
 #include "../Caravel/ShmCtl.h"
+#include "../Caravel/PRF.h"
 
 
 using namespace std;
@@ -118,11 +120,6 @@ bool SecureJoin::computeLSH(uint32_t L, double w)
 	}
 	uiLshL = L;
 	dLshW = w;
-	if (arMetaVal[0][0] > 1)
-	{
-		formalize(arMetaVal, uiAllNum, uiDataDimension);
-	}
-
 
 	c2lsh.Init(uiDataDimension, uiLshL, dLshW);
 	arLsh = new uint32_t*[uiAllNum];
@@ -154,12 +151,21 @@ bool SecureJoin::buildIndex(uint32_t size)
 	}
 	uiUserNum = size;
 
-	encIndex.Init(uiUserNum * uiLshL, 0.7, 24, shmKey);
+	int iShmID = shmget(shmKey, 0, 0);
+	if (iShmID >= 0)
+	{
+		encIndex.AttachIndex(uiUserNum * uiLshL, 0.7, 24, shmKey);
+	}
+	else
+	{
+		encIndex.Init(uiUserNum * uiLshL, 0.7, 24, shmKey);
 
-	encIndex.BuildIndex(arLsh, uiUserNum, uiLshL);
+		encIndex.BuildIndex(arLsh, uiUserNum, uiLshL);
+	}
+
 
 	encIndex.ShowBukHashState();
-	indexSize = encIndex.getIndexSize();
+	indexSize = encIndex.getIndexSize()/ uiLshL;
 	indexMomery = indexSize * sizeof(BukEncBlock);
 
 	return true;
@@ -172,7 +178,7 @@ string SecureJoin::getMataDataByID(uint32_t id)
 	{
 		for (int i = 0; i < uiDataDimension; i++)
 		{
-			ss << arMetaVal[i];
+			ss << arMetaVal[id][i];
 			if (i != uiDataDimension - 1)
 			{
 				ss << " ";
