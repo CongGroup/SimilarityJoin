@@ -1188,7 +1188,8 @@ int main(int argc, char **argv)
 			}
 			double dSelfQueryR = PrintAndGet<double>("Input your self-query R.");
 			vector<uint32_t> vecSelfQuery;
-			uint32_t uiSecurityK = PrintAndGet<uint32_t>("Input your security Threshold K.");
+			//uint32_t uiSecurityK = PrintAndGet<uint32_t>("Input your security Threshold K.");
+			uint32_t uiSecurityK = 999;
 			SelfQuery(arMetaVal, uiAllNum, uiUseDimension, arLsh, uiLshL, dSelfQueryR, vecJoin, vecSelfQuery, uiSecurityK);
 			cout << "Self query set = " << vecSelfQuery.size() << endl;
 
