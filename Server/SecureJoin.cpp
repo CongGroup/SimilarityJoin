@@ -182,7 +182,7 @@ string SecureJoin::getMataDataByID(uint32_t id)
 	{
 		for (int i = 0; i < uiDataDimension; i++)
 		{
-			ss << arMetaVal[i];
+			ss << arMetaVal[id][i];
 			if (i != uiDataDimension - 1)
 			{
 				ss << " ";
