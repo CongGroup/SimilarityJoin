@@ -16,6 +16,7 @@ using namespace caravel;
 SecureJoin::SecureJoin()
 {
 	init();
+	markSecond();
 }
 
 SecureJoin::~SecureJoin()
@@ -250,13 +251,9 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 		for (uint32_t uiL = 0; uiL < uiLshL; uiL++)
 		{
 			uint32_t uiLsh = arQueryLsh[uiL];
-			//encIndex.QueryOne(uiLsh, uiL, vecResult);
-			uint32_t a, b;
-			char buf[32];
-			PRF::Sha256((char*)&a, sizeof(uint32_t), (char*)&b, sizeof(uint32_t), buf, 32);
-			cout << "countC successful" << endl;
-			//encIndex.QueryOne(0, uiL, vecResult);
+			encIndex.QueryOne(uiLsh, uiL, vecResult);
 		}
+		cout << "about Self" << endl;
 		abort();
 
 		map<uint32_t, uint32_t> mapCombine;
@@ -642,7 +639,7 @@ char SecureJoin::Type2c(int lvl)
 
 int SecureJoin::markSecond()
 {
-	static time_t t_cur;
+	static time_t t_cur(0);
 	uint32_t ui_Time = time(NULL) - t_cur;
 	t_cur = time(NULL);
 
