@@ -231,12 +231,16 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 	PRF::Sha256((char*)&a, sizeof(uint32_t), (char*)&b, sizeof(uint32_t), buf, 32);
 	cout << "countA successful" << endl;
 
+	cout << "uiJoinNum" << uiJoinNum << "uiDataDimension" << uiDataDimension << endl;
+
 	uint32_t **queryLsh = new uint32_t*[uiJoinNum];
 	for (int i = 0; i < uiJoinNum; i++)
 	{
 		queryLsh[i] = new uint32_t[uiDataDimension];
 		computeLsh(queryLsh[i], joinMataData[i]);
 	}
+	PRF::Sha256((char*)&a, sizeof(uint32_t), (char*)&b, sizeof(uint32_t), buf, 32);
+	cout << "countB successful" << endl;
 
 	for (uint32_t uiCur = 0; uiCur < uiJoinNum; uiCur++)
 	{
@@ -250,6 +254,7 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 			uint32_t a, b;
 			char buf[32];
 			PRF::Sha256((char*)&a, sizeof(uint32_t), (char*)&b, sizeof(uint32_t), buf, 32);
+			cout << "countC successful" << endl;
 			//encIndex.QueryOne(0, uiL, vecResult);
 		}
 		abort();
