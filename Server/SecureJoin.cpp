@@ -15,12 +15,6 @@ using namespace caravel;
 
 SecureJoin::SecureJoin()
 {
-	uint32_t a=1000, b=1111;
-	char pCombine[33] = { 0 };
-	PRF::Sha256((char*)&a, sizeof(uint32_t), (char*)&b, sizeof(uint32_t), pCombine, 32);
-	cout << pCombine << "sha256 value" << endl;
-
-
 	init();
 }
 

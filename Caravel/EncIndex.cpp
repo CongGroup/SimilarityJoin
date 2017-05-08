@@ -111,6 +111,7 @@ void EncIndex::QueryOne(uint32_t uiLsh, uint32_t uiF, vector<uint32_t> &vecResul
     char szCombine[SHA256_DIGEST_LENGTH];
     char szTD[SHA256_DIGEST_LENGTH];
     char szMask[SHA256_DIGEST_LENGTH];
+	cout << "L is " << uiLsh << " F is " << uiF << " Size is " << SHA256_DIGEST_LENGTH << endl;
     GenerateTrapdoorAndMask(uiLsh, uiF, szCombine, SHA256_DIGEST_LENGTH, szTD, SHA256_DIGEST_LENGTH, szMask, SHA256_DIGEST_LENGTH);
     //Add Counter
     uint32_t uiC = 0;
