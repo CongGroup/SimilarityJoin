@@ -100,6 +100,7 @@ public:
 	{
 		_return.push_back(to_string(joinEngine.uiUserNum));
 		_return.push_back(to_string(joinEngine.indexSize));
+		//2142639360 bytes
 		_return.push_back(to_string(joinEngine.indexMomery / 1024 / 1024));
 		//16433180Kb memory
 		_return.push_back(to_string(16433180/1024));
