@@ -481,7 +481,7 @@ int SecureJoin::splitString(const std::string& s, std::vector<std::string>& v, c
 		pos1 = pos2 + c.size();
 		pos2 = s.find(c, pos1);
 	}
-	if (pos1 <= s.length())
+	if (pos1 < s.length())
 		v.push_back(s.substr(pos1));
 
 	return v.size();
