@@ -119,11 +119,6 @@ bool SecureJoin::computeLSH(uint32_t L, double w)
 	}
 	uiLshL = L;
 	dLshW = w;
-	if (arMetaVal[0][0] > 1)
-	{
-		formalize(arMetaVal, uiAllNum, uiDataDimension);
-	}
-
 
 	c2lsh.Init(uiDataDimension, uiLshL, dLshW);
 	arLsh = new uint32_t*[uiAllNum];
