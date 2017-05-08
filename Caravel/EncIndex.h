@@ -24,7 +24,6 @@ typedef struct _stQueryResult
 }stQueryResult;
 
 #define DEF_BUKENCBLOCK_SIZE 32
-#define SHA256_DIGEST_LENGTH 32
 
 typedef union stBukEncBlock
 {
