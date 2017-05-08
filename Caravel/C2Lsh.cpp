@@ -20,15 +20,15 @@ namespace caravel {
 
     C2Lsh::~C2Lsh()
     {
-		//if (m_parLshFunction != NULL)
-		//{
-		//	for (uint32_t uiCur = 0; uiCur < m_uiL; uiCur++)
-		//	{
-		//		delete[]m_parLshFunction[uiCur]->arA;
-		//		delete m_parLshFunction[uiCur];
-		//	}
-		//	delete[]m_parLshFunction;
-		//}
+		if (m_parLshFunction != NULL)
+		{
+			for (uint32_t uiCur = 0; uiCur < m_uiL; uiCur++)
+			{
+				delete[]m_parLshFunction[uiCur]->arA;
+				delete m_parLshFunction[uiCur];
+			}
+			delete[]m_parLshFunction;
+		}
     }
 
     void C2Lsh::Init(uint32_t uiD, uint32_t uiL, double dW)

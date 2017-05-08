@@ -20,7 +20,7 @@ SecureJoin::SecureJoin()
 
 SecureJoin::~SecureJoin()
 {
-	//free();
+	free();
 }
 
 int SecureJoin::init()
@@ -243,8 +243,12 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 		{
 			uint32_t uiLsh = arQueryLsh[uiL];
 			//encIndex.QueryOne(uiLsh, uiL, vecResult);
-			encIndex.QueryOne(0, uiL, vecResult);
+			uint32_t a, b;
+			char buf[32];
+			PRF::Sha256((char*)&a, sizeof(uint32_t), (char*)&b, sizeof(uint32_t), buf, 32);
+			//encIndex.QueryOne(0, uiL, vecResult);
 		}
+		abort();
 
 		map<uint32_t, uint32_t> mapCombine;
 		vector<uint32_t> vecResultInK;
