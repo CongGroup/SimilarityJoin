@@ -20,7 +20,7 @@ SecureJoin::SecureJoin()
 
 SecureJoin::~SecureJoin()
 {
-	free();
+	//free();
 }
 
 int SecureJoin::init()
