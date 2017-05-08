@@ -88,7 +88,6 @@ uint32_t SecureJoin::loadData(string mataDataPaht, uint32_t maxSize)
 		uint32_t uiCurNum = 0;
 		while (getline(ifs, strLines, '\n'))
 		{
-			uiCurNum++;
 			splitRes.clear();
 			splitString(strLines, splitRes, " ");
 			for (int i = 0; i < splitRes.size() && i < uiDataDimension; i++)
@@ -104,6 +103,7 @@ uint32_t SecureJoin::loadData(string mataDataPaht, uint32_t maxSize)
 				}
 			}
 			indexDistributed.counter[checkLevel(arMetaVal[uiCurNum])]++;
+			uiCurNum++;
 		}
 		ifs.close();
 		return true;
