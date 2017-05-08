@@ -8,7 +8,7 @@
     <!--Custom Style-->
     <style>
         .wizard-big.wizard > .content {
-            min-height: 450px !important;
+            min-height: 440px !important;
         }
     </style>
 
