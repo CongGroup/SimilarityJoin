@@ -270,7 +270,6 @@ void SelfQuery(double **arMetaData, uint32_t uiAllNum, uint32_t uiDimension,
 	}
 }
 
-
 int checkLevel(double* pMateData)
 {
 	//not normalize

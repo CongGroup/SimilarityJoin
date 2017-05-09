@@ -85,6 +85,7 @@ uint32_t SecureJoin::loadData(string mataDataPaht, uint32_t maxSize)
 		for (int i = 0; i < uiAllNum; i++)
 		{
 			arMetaVal[i] = new double[uiDataDimension];
+			memset(arMetaVal[i], 0, sizeof(double)*uiDataDimension);
 		}
 
 		vector<string> splitRes;
@@ -234,7 +235,6 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 		queryLsh[i] = new uint32_t[uiDataDimension];
 		computeLsh(queryLsh[i], joinMataData[i]);
 	}
-
 
 	for (uint32_t uiCur = 0; uiCur < uiJoinNum; uiCur++)
 	{
@@ -497,9 +497,12 @@ int SecureJoin::splitString(const std::string& s, std::vector<std::string>& v, c
 
 void SecureJoin::normalize(double * arMetaData, uint32_t uiDimension)
 {
-	for (uint32_t uiD = 0; uiD < uiDimension; uiD++)
+	if (arMetaData!= NULL&&arMetaData[0] > 1)
 	{
-		arMetaData[uiD] = arMetaData[uiD] / arMaxBoundry[uiD];
+		for (uint32_t uiD = 0; uiD < uiDimension; uiD++)
+		{
+			arMetaData[uiD] = arMetaData[uiD] / arMaxBoundry[uiD];
+		}
 	}
 }
 

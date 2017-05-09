@@ -126,9 +126,7 @@ void EncIndex::QueryOne(uint32_t uiLsh, uint32_t uiF, vector<uint32_t> &vecResul
             return;
         }
         vecResult.push_back(iID);
-
         uiC++;
-
     }
 }
 

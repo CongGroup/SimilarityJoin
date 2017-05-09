@@ -108,14 +108,19 @@ public:
 
 	void JoinByStrategy1(std::vector<int32_t> & _return, const std::vector<std::string> & Datas, const int32_t ThresholdK, const int32_t TimeOut) {
 		int dimension = joinEngine.uiFinanceDimension;
-		double** buffer = new double*[Datas.size()];
-		for (int i = 0; i < Datas.size(); i++)
+		uint32_t querySize = Datas.size();
+		if (querySize < 1)
+		{
+			return;
+		}
+		double** buffer = new double*[querySize];
+		for (int i = 0; i < querySize; i++)
 		{
 			buffer[i] = new double[dimension];
 		}
 
 		vector<string> tmpVecStr;
-		for (int i = 0; i < Datas.size(); i++)
+		for (int i = 0; i < querySize; i++)
 		{
 			tmpVecStr.clear();
 			joinEngine.splitString(Datas[i], tmpVecStr, " ");
@@ -126,7 +131,12 @@ public:
 			}
 		}
 
-		_return = joinEngine.joinByStrategy1(buffer, Datas.size(), ThresholdK);
+		if (buffer[0][0] < 1 && buffer[1][1] < 1)
+		{
+			joinEngine.normalize(buffer[0], dimension);
+		}
+
+		_return = joinEngine.joinByStrategy1(buffer, querySize, ThresholdK);
 		/*
 		for (int i = 0; i < Datas.size(); i++)
 		{
