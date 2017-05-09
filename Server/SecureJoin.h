@@ -51,6 +51,7 @@ public:
 
 	int splitString(const string& s, vector<string>& v, const string& c, bool notNull = true);
 	void normalize(double *arMetaData, uint32_t uiDimension);
+	void renormalize(double *arMetaData, uint32_t uiDimension);
 
 protected:
 	int countLines(string sPath);
