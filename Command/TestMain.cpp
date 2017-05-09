@@ -87,11 +87,11 @@ void PrintCmdList() {
 	cout << "  || 4  Per token process time" << endl;
 	cout << "  || 5  Strategy I Latency CDF" << endl;
 	cout << "  || 6  Strategy II Latency CDF" << endl;
-	cout << "  || 7¡ïStrategy I Join Time" << endl;
-	cout << "  || 8¡ïStrategy II Join Time" << endl;
+	cout << "  || 7 â˜…Strategy I Join Time" << endl;
+	cout << "  || 8 â˜…Strategy II Join Time" << endl;
 	cout << "  || 9  Strategy I, II Join Accuracy" << endl;
 	cout << "  || a  Strategy III Join Accuracy" << endl;
-	cout << "  || b¡ïStrategy III Join Time" << endl;
+	cout << "  || b â˜…Strategy III Join Time" << endl;
 	cout << "  || c  Strategy III Security Distribution" << endl;
 
 
