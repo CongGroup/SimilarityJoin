@@ -371,10 +371,10 @@ ostream& operator << (ostream& out, const Proportion& por)
 {
 	cout.setf(ios::right);
 	cout << "Total " << setw(6) << por.total << endl;
-	cout << "Type A" << setw(6) << por.counter[0] << "  , percentage is " << setw(12) << 100 * (por.counter[0] + .0) / por.total << "%" << endl;
-	cout << "Type B" << setw(6) << por.counter[1] << "  , percentage is " << setw(12) << 100 * (por.counter[1] + .0) / por.total << "%" << endl;
-	cout << "Type C" << setw(6) << por.counter[2] << "  , percentage is " << setw(12) << 100 * (por.counter[2] + .0) / por.total << "%" << endl;
-	cout << "Type D" << setw(6) << por.counter[3] << "  , percentage is " << setw(12) << 100 * (por.counter[3] + .0) / por.total << "%" << endl;
+	cout << "Type A" << setw(6) << por.counter[0] << "  , percentage is " << setw(8) << 100.0 * por.counter[0]  / por.total << "%" << endl;
+	cout << "Type B" << setw(6) << por.counter[1] << "  , percentage is " << setw(8) << 100.0 * por.counter[1]  / por.total << "%" << endl;
+	cout << "Type C" << setw(6) << por.counter[2] << "  , percentage is " << setw(8) << 100.0 * por.counter[2]  / por.total << "%" << endl;
+	cout << "Type D" << setw(6) << por.counter[3] << "  , percentage is " << setw(8) << 100.0 * por.counter[3]  / por.total << "%" << endl;
 	cout.unsetf(ios::right);
 	return out;
 }
