@@ -26,7 +26,7 @@ SecureJoin::~SecureJoin()
 
 int SecureJoin::init()
 {
-	arMaxBoundry = new int[uiFinanceDimension];
+	arMaxBoundry = new double[uiFinanceDimension];
 	vector<string> splitRes;
 	splitString(strMaxBoundry, splitRes, " ");
 	for (int i = 0; i < uiFinanceDimension; i++)
