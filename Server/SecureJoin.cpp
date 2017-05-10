@@ -236,11 +236,6 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 		computeLsh(queryLsh[uiCur], joinMataData[uiCur]);
 		uint32_t *arQueryLsh = queryLsh[uiCur];
 
-		for (int i = 0; i < uiDataDimension; i++)
-		{
-			cout << arMetaVal[uiCur][i] << " " << joinMataData[uiCur][i] << endl;
-		}
-
 		vector<uint32_t> vecResult;
 		for (uint32_t uiL = 0; uiL < uiLshL; uiL++)
 		{
@@ -301,7 +296,7 @@ vector<int> SecureJoin::joinByStrategy2(double ** joinMataData, int num, int Thr
 	uint32_t **queryLsh = new uint32_t*[uiJoinNum];
 	for (int i = 0; i < uiJoinNum; i++)
 	{
-		queryLsh[i] = new uint32_t[uiDataDimension];
+		queryLsh[i] = new uint32_t[uiLshL];
 		computeLsh(queryLsh[i], joinMataData[i]);
 	}
 
@@ -375,7 +370,7 @@ vector<int> SecureJoin::joinByStrategy3(double ** joinMataData, int num, int Thr
 	vector<uint32_t> vecJoin;
 	for (uint32_t uiCur = 0; uiCur < uiJoinNum; uiCur++)
 	{
-		queryLsh[uiCur] = new uint32_t[uiDataDimension];
+		queryLsh[uiCur] = new uint32_t[uiLshL];
 		computeLsh(queryLsh[uiCur], joinMataData[uiCur]);
 		vecJoin.push_back(uiCur);
 	}
