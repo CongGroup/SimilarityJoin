@@ -246,7 +246,7 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 			uint32_t uiLsh = arQueryLsh[uiL];
 			encIndex.QueryOne(uiLsh, uiL, vecResult);
 		}
-
+		cout << "ResultSize is " << vecResult.size();
 		map<uint32_t, uint32_t> mapCombine;
 		vector<uint32_t> vecResultInK;
 		for (vector<uint32_t>::iterator it = vecResult.begin(); it != vecResult.end(); it++)
@@ -274,11 +274,11 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 		vecRes.push_back((int)*i);
 	}
 
-	for (int i = 0; i < uiJoinNum; i++)
-	{
-		delete[] queryLsh[i];
-	}
-	delete[] queryLsh;
+	//for (int i = 0; i < uiJoinNum; i++)
+	//{
+	//	delete[] queryLsh[i];
+	//}
+	//delete[] queryLsh;
 	return vecRes;
 
 }
