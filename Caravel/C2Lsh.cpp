@@ -62,7 +62,6 @@ namespace caravel {
 
     void C2Lsh::Compute(double *arMatrix, uint32_t *aruiRet)
     {
-		cout << m_uiL << " " << m_uiD << " " << endl;
         //compute
         for (uint32_t uiCur = 0; uiCur < m_uiL; uiCur++)
         {

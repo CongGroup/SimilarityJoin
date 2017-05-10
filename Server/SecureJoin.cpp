@@ -230,14 +230,9 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 	markSecond();
 	uint32_t **queryLsh = new uint32_t*[uiJoinNum];
 
-	joinMataData = arMetaVal;
-	queryLsh = arLsh;
-
-	cout << "Join count is " << uiJoinNum << " d is " << uiDataDimension << endl;
-
 	for (uint32_t uiCur = 0; uiCur < uiJoinNum; uiCur++)
 	{
-		queryLsh[uiCur] = new uint32_t[uiDataDimension];
+		queryLsh[uiCur] = new uint32_t[uiLshL];
 		computeLsh(queryLsh[uiCur], joinMataData[uiCur]);
 		uint32_t *arQueryLsh = queryLsh[uiCur];
 
@@ -274,11 +269,11 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 		vecRes.push_back((int)*i);
 	}
 
-	//for (int i = 0; i < uiJoinNum; i++)
-	//{
-	//	delete[] queryLsh[i];
-	//}
-	//delete[] queryLsh;
+	for (int i = 0; i < uiJoinNum; i++)
+	{
+		delete[] queryLsh[i];
+	}
+	delete[] queryLsh;
 	return vecRes;
 
 }
