@@ -226,6 +226,8 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 	uint64_t ulNeedBandwidthNum = 0;
 	uint32_t uiLimitK = ThresholdK;
 
+	joinMataData = arMetaVal;
+
 	set<uint32_t> setResult;
 	markSecond();
 
