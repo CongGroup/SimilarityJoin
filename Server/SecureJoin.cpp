@@ -294,16 +294,14 @@ vector<int> SecureJoin::joinByStrategy2(double ** joinMataData, int num, int Thr
 	markSecond();
 
 	uint32_t **queryLsh = new uint32_t*[uiJoinNum];
-	for (int i = 0; i < uiJoinNum; i++)
-	{
-		queryLsh[i] = new uint32_t[uiLshL];
-		computeLsh(queryLsh[i], joinMataData[i]);
-	}
 
 	for (uint32_t uiCur = 0; uiCur < uiJoinNum; uiCur++)
 	{
+		queryLsh[uiCur] = new uint32_t[uiLshL];
+		computeLsh(queryLsh[uiCur], joinMataData[uiCur]);
 		uint32_t *arQueryLsh = queryLsh[uiCur];
 		map<uint32_t, uint32_t> mapCombine;
+		vector<uint32_t> vecResultInK;
 
 		for (uint32_t uiL = 0; uiL < uiLshL; uiL++)
 		{
@@ -322,22 +320,16 @@ vector<int> SecureJoin::joinByStrategy2(double ** joinMataData, int num, int Thr
 			}
 			for (vector<uint32_t>::iterator it = pVecReslt->begin(); it != pVecReslt->end(); it++)
 			{
-				mapCombine[*it]++;
+				if (++mapCombine[*it] == uiLimitK)
+				{
+					vecResultInK.push_back(*it);
+				}
 			}
 		}
 
-		vector<uint32_t> vecResultInK;
-
-		for (map<uint32_t, uint32_t>::iterator it = mapCombine.begin(); it != mapCombine.end(); it++)
-		{
-			if (it->second > uiLimitK)
-			{
-				vecResultInK.push_back(it->first);
-			}
-		}
 		setResult.insert(vecResultInK.begin(), vecResultInK.end());
 
-		if (timeout -= markSecond() < 0)
+		if ((timeout -= markSecond()) < 0)
 		{
 			break;
 		}
