@@ -251,25 +251,30 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 		cout << "ResultSize is " << vecResult.size() << endl;
 		map<uint32_t, uint32_t> mapCombine;
 		vector<uint32_t> vecResultInK;
+
+		uint32_t max=0;
 		for (vector<uint32_t>::iterator it = vecResult.begin(); it != vecResult.end(); it++)
 		{
 			if (++mapCombine[*it] == uiLimitK)
 			{
 				vecResultInK.push_back(*it);
 			}
+			if (mapCombine[*it] > max)
+			{
+				max = mapCombine[*it];
+			}
 		}
 		ulNeedBandwidthNum += vecResultInK.size();
 
 		setResult.insert(vecResultInK.begin(), vecResultInK.end());
 
-		cout << "timeout is " << timeout << endl;
-		cout << "mark Second is " << markSecond() << endl;
-		if (timeout -= markSecond() < 0)
+		if ((timeout -= markSecond()) < 0)
 		{
 			break;
 		}
 
 	}
+	cout << "max is " << max << endl;
 	cout << "ulNeedBandwidthNum = " << ulNeedBandwidthNum << endl;
 
 	vector<int> vecRes;
