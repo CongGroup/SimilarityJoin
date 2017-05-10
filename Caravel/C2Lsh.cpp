@@ -89,25 +89,22 @@ namespace caravel {
 
     double C2Lsh::genGaussianRandom()
     {
-        static random_device rd;
-        static mt19937 mt(rd());
-        static normal_distribution<float> gr(0.0, 1.0);
+        static mt19937 mt(0);
+		normal_distribution<float> gr(0.0, 1.0);
         return gr(mt);
     }
 
     uint32_t C2Lsh::genUint32Random(uint32_t uiRangeStart, uint32_t uiRangeEnd)
     {
-        static random_device rd;
-        static mt19937 mt(rd());
-        uniform_int_distribution<uint32_t> gr(uiRangeStart, uiRangeEnd);
+        static mt19937 mt(0);
+		uniform_int_distribution<uint32_t> gr(uiRangeStart, uiRangeEnd);
         return gr(mt);
     }
 
     double C2Lsh::genUniformRandom(double dRangeStart, double dRangeEnd)
     {
-        static random_device rd;
-        static mt19937 mt(rd());
-        uniform_real_distribution<double> gr(dRangeStart, dRangeEnd);
+        static mt19937 mt(0);
+		uniform_real_distribution<double> gr(dRangeStart, dRangeEnd);
         return gr(mt);
     }
 
@@ -121,7 +118,5 @@ namespace caravel {
         }
         return sqrt(dRet);
     }
-
-
 }
 
