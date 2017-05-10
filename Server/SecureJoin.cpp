@@ -253,18 +253,33 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 		map<uint32_t, uint32_t> mapCombine;
 		vector<uint32_t> vecResultInK;
 
-		
 		for (vector<uint32_t>::iterator it = vecResult.begin(); it != vecResult.end(); it++)
 		{
-			if (++mapCombine[*it] == uiLimitK)
-			{
-				vecResultInK.push_back(*it);
-			}
+			mapCombine[*it]++;
 			if (mapCombine[*it] > max)
 			{
 				max = mapCombine[*it];
 			}
 		}
+		for (map<uint32_t, uint32_t>::iterator it = mapCombine.begin(); it != mapCombine.end(); it++)
+		{
+			if (it->second > uiLimitK)
+			{
+				vecResultInK.push_back(it->first);
+			}
+		}
+		 
+		//for (vector<uint32_t>::iterator it = vecResult.begin(); it != vecResult.end(); it++)
+		//{
+		//	if (++mapCombine[*it] == uiLimitK)
+		//	{
+		//		vecResultInK.push_back(*it);
+		//	}
+		//	if (mapCombine[*it] > max)
+		//	{
+		//		max = mapCombine[*it];
+		//	}
+		//}
 		ulNeedBandwidthNum += vecResultInK.size();
 
 		setResult.insert(vecResultInK.begin(), vecResultInK.end());
