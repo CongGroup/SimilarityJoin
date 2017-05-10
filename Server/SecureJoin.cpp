@@ -235,7 +235,7 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 	uint32_t **queryLsh = arLsh;
 	uint32_t max = 0;
 
-	cout<<"Join count is "<< uiJoinNum << endl;
+	cout<<"Join count is "<< uiJoinNum<<" d is " <<uiDataDimension<< endl;
 
 	for (uint32_t uiCur = 0; uiCur < uiJoinNum; uiCur++)
 	{
@@ -268,18 +268,6 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 				vecResultInK.push_back(it->first);
 			}
 		}
-		 
-		//for (vector<uint32_t>::iterator it = vecResult.begin(); it != vecResult.end(); it++)
-		//{
-		//	if (++mapCombine[*it] == uiLimitK)
-		//	{
-		//		vecResultInK.push_back(*it);
-		//	}
-		//	if (mapCombine[*it] > max)
-		//	{
-		//		max = mapCombine[*it];
-		//	}
-		//}
 		ulNeedBandwidthNum += vecResultInK.size();
 
 		setResult.insert(vecResultInK.begin(), vecResultInK.end());
