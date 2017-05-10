@@ -226,17 +226,18 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 	uint64_t ulNeedBandwidthNum = 0;
 	uint32_t uiLimitK = ThresholdK;
 
-	joinMataData = arMetaVal;
-
 	set<uint32_t> setResult;
 	markSecond();
 
-	uint32_t **queryLsh = new uint32_t*[uiJoinNum];
+	//uint32_t **queryLsh = new uint32_t*[uiJoinNum];
+
+	joinMataData = arMetaVal;
+	uint32_t **queryLsh = arLsh;
 
 	for (uint32_t uiCur = 0; uiCur < uiJoinNum; uiCur++)
 	{
-		queryLsh[uiCur] = new uint32_t[uiDataDimension];
-		computeLsh(queryLsh[uiCur], joinMataData[uiCur]);
+		//queryLsh[uiCur] = new uint32_t[uiDataDimension];
+		//computeLsh(queryLsh[uiCur], joinMataData[uiCur]);
 		uint32_t *arQueryLsh = queryLsh[uiCur];
 
 		vector<uint32_t> vecResult;
