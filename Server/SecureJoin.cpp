@@ -233,8 +233,8 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 	for (uint32_t uiCur = 0; uiCur < uiJoinNum; uiCur++)
 	{
 		queryLsh[uiCur] = new uint32_t[uiLshL];
-		computeLsh(queryLsh[uiCur], joinMataData[uiCur]);
 		uint32_t *arQueryLsh = queryLsh[uiCur];
+		computeLsh(arQueryLsh, joinMataData[uiCur]);
 
 		vector<uint32_t> vecResult;
 		for (uint32_t uiL = 0; uiL < uiLshL; uiL++)
@@ -248,7 +248,9 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 		for (auto it = vecResult.begin(); it != vecResult.end(); it++)
 		{
 			if (++mapCombine[*it] == uiLimitK)
+			{
 				vecResultInK.push_back(*it);
+			}
 		}
 
 		ulNeedBandwidthNum += vecResultInK.size();
