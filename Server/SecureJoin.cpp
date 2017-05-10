@@ -16,7 +16,6 @@ using namespace caravel;
 SecureJoin::SecureJoin()
 {
 	init();
-	markSecond();
 }
 
 SecureJoin::~SecureJoin()
@@ -393,14 +392,18 @@ vector<int> SecureJoin::joinByStrategy3(double ** joinMataData, int num, int Thr
 		}
 	}
 
-	double ** arrSelfQueryMataData = new double *[vecSelfQuery.size()];
-	for (int i = 0; i < vecSelfQuery.size(); i++)
+	uint32_t uiSelfQueryNum = vecSelfQuery.size();
+	cout << "After selfQuery the join num is " << uiSelfQueryNum;
+
+
+	double ** arrSelfQueryMataData = new double *[uiSelfQueryNum];
+	for (int i = 0; i < uiSelfQueryNum; i++)
 	{
 		arrSelfQueryMataData[i] = new double[uiDataDimension];
 		memcpy(arrSelfQueryMataData[i], joinMataData[vecSelfQuery[i]], sizeof(double)*uiDataDimension);
 	}
 
-	vector<int> res = joinByStrategy2(arrSelfQueryMataData, vecSelfQuery.size(), ThresholdK, timeout);
+	vector<int> res = joinByStrategy2(arrSelfQueryMataData, uiSelfQueryNum, ThresholdK, timeout);
 
 	for (int i = 0; i < uiJoinNum; i++)
 	{
