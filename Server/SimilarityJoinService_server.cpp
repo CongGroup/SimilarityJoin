@@ -30,6 +30,7 @@ protected:
 public:
 	SimilarityJoinServiceHandler() 
 	{
+		srand(0);
 		string path = "financeNormalize.data";
 		userCount = joinEngine.loadData(path);
 		cout << "Load " << userCount << " data from " << path << endl;
