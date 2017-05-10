@@ -262,6 +262,8 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 
 		setResult.insert(vecResultInK.begin(), vecResultInK.end());
 
+		cout << "timeout is " << timeout << endl;
+		cout << "mark Second is " << markSecond() << endl;
 		if (timeout -= markSecond() < 0)
 		{
 			break;
