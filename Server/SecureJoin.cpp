@@ -233,6 +233,7 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 
 	joinMataData = arMetaVal;
 	uint32_t **queryLsh = arLsh;
+	uint32_t max = 0;
 
 	cout<<"Join count is "<< uiJoinNum << endl;
 
@@ -252,7 +253,7 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 		map<uint32_t, uint32_t> mapCombine;
 		vector<uint32_t> vecResultInK;
 
-		uint32_t max=0;
+		
 		for (vector<uint32_t>::iterator it = vecResult.begin(); it != vecResult.end(); it++)
 		{
 			if (++mapCombine[*it] == uiLimitK)
