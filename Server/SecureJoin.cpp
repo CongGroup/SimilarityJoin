@@ -137,9 +137,10 @@ bool SecureJoin::computeLSH(uint32_t L, double w)
 
 bool SecureJoin::computeLsh(uint32_t * lsh, double * mateData)
 {
-	if (lsh&&mateData)
+	if (lsh != NULL&&mateData != NULL)
 	{
 		c2lsh.Compute(mateData, lsh);
+		return true;
 	}
 
 	return false;
@@ -167,8 +168,8 @@ bool SecureJoin::buildIndex(uint32_t size)
 
 
 	encIndex.ShowBukHashState();
-	indexSize = encIndex.getIndexSize()/ uiLshL;
-	indexMomery = encIndex.getIndexSize() * (sizeof(uint64_t)+sizeof(BukEncBlock));
+	indexSize = encIndex.getIndexSize() / uiLshL;
+	indexMomery = encIndex.getIndexSize() * (sizeof(uint64_t) + sizeof(BukEncBlock));
 
 	return true;
 }
@@ -232,12 +233,12 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 	joinMataData = arMetaVal;
 	queryLsh = arLsh;
 
-	cout<<"Join count is "<< uiJoinNum<<" d is " <<uiDataDimension<< endl;
+	cout << "Join count is " << uiJoinNum << " d is " << uiDataDimension << endl;
 
 	for (uint32_t uiCur = 0; uiCur < uiJoinNum; uiCur++)
 	{
 		queryLsh[uiCur] = new uint32_t[uiDataDimension];
-		//computeLsh(queryLsh[uiCur], joinMataData[uiCur]);
+		computeLsh(queryLsh[uiCur], joinMataData[uiCur]);
 		uint32_t *arQueryLsh = queryLsh[uiCur];
 
 		vector<uint32_t> vecResult;
@@ -492,7 +493,7 @@ int SecureJoin::splitString(const std::string& s, std::vector<std::string>& v, c
 
 void SecureJoin::normalize(double * arMetaData, uint32_t uiDimension)
 {
-	if (arMetaData!= NULL&&arMetaData[0] > 1)
+	if (arMetaData != NULL&&arMetaData[0] > 1)
 	{
 		for (uint32_t uiD = 0; uiD < uiDimension; uiD++)
 		{

@@ -63,7 +63,6 @@ namespace caravel {
     void C2Lsh::Compute(double *arMatrix, uint32_t *aruiRet)
     {
         //compute
-
         for (uint32_t uiCur = 0; uiCur < m_uiL; uiCur++)
         {
             PLSHFUNC pFunc = m_parLshFunction[uiCur];
@@ -72,18 +71,12 @@ namespace caravel {
             for (uint32_t uiCurD = 0; uiCurD < m_uiD; uiCurD++)
             {
                 dLsh += arMatrix[uiCurD] * pFunc->arA[uiCurD];
-                //cout << "Value = " << arMatrix[uiCurD] * pFunc->arA[uiCurD] << endl;
-
             }
 
             dLsh += pFunc->dB;
             dLsh /= m_dW;
-
-            //cout << "LSH = " << dLsh << endl;
-
             aruiRet[uiCur] = (uint32_t)floor(dLsh);
         }
-
     }
 
 
