@@ -374,11 +374,8 @@ vector<int> SecureJoin::joinByStrategy3(double ** joinMataData, int num, int Thr
 		uint32_t uiOffset = rand() % vecJoin.size();
 		uint32_t uiQuerySample = vecJoin[uiOffset];
 
-		//delete it from vecQuery
 		vecJoin.erase(vecJoin.begin() + uiOffset);
-		//Add the sample point to result vector
 		vecSelfQuery.push_back(uiQuerySample);
-		//query for others
 		for (vector<uint32_t>::iterator it = vecJoin.begin(); it != vecJoin.end();)
 		{
 			if (C2Lsh::ComputeL2(joinMataData[uiQuerySample], joinMataData[*it], uiDataDimension) < dSelfQueryR)
@@ -400,7 +397,7 @@ vector<int> SecureJoin::joinByStrategy3(double ** joinMataData, int num, int Thr
 	for (int i = 0; i < vecSelfQuery.size(); i++)
 	{
 		arrSelfQueryMataData[i] = new double[uiDataDimension];
-		memcpy(arrSelfQueryMataData, joinMataData[vecSelfQuery[i]], sizeof(double)*uiDataDimension);
+		memcpy(arrSelfQueryMataData[i], joinMataData[vecSelfQuery[i]], sizeof(double)*uiDataDimension);
 	}
 
 	vector<int> res = joinByStrategy2(arrSelfQueryMataData, vecSelfQuery.size(), ThresholdK, timeout);
