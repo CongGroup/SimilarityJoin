@@ -234,11 +234,11 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 	{
 		queryLsh[uiCur] = new uint32_t[uiLshL];
 		computeLsh(queryLsh[uiCur], joinMataData[uiCur]);
-		uint32_t *arQueryLsh = arLsh[uiCur];
+		uint32_t *arQueryLsh = queryLsh[uiCur];
 
 		for (int i = 0; i < uiDataDimension; i++)
 		{
-			cout << arMetaVal[i] << " " << joinMataData[i] << endl;
+			cout << arMetaVal[uiCur][i] << " " << joinMataData[uiCur][i] << endl;
 		}
 
 		vector<uint32_t> vecResult;
