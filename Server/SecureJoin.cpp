@@ -230,7 +230,7 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 	uint32_t **queryLsh = new uint32_t*[uiJoinNum];
 
 	joinMataData = arMetaVal;
-	uint32_t **queryLsh = arLsh;
+	queryLsh = arLsh;
 
 	cout<<"Join count is "<< uiJoinNum<<" d is " <<uiDataDimension<< endl;
 
@@ -264,8 +264,7 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 		}
 
 	}
-	
-	cout << "max is " << max << endl;
+
 	cout << "ulNeedBandwidthNum = " << ulNeedBandwidthNum << endl;
 
 	vector<int> vecRes;
