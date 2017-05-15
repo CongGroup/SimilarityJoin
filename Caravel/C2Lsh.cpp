@@ -17,7 +17,6 @@ namespace caravel {
         m_parLshFunction = NULL;
     }
 
-
     C2Lsh::~C2Lsh()
     {
 		if (m_parLshFunction != NULL)
@@ -79,7 +78,6 @@ namespace caravel {
         }
     }
 
-
     double C2Lsh::genGaussianRandom()
     {
         static mt19937 mt(0);
@@ -100,7 +98,6 @@ namespace caravel {
 		uniform_real_distribution<double> gr(dRangeStart, dRangeEnd);
         return gr(mt);
     }
-
 
     double C2Lsh::ComputeL2(double *ardX, double *ardY, uint32_t uiD)
     {
