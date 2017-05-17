@@ -403,6 +403,7 @@ vector<int> SecureJoin::joinByStrategy3(double ** joinMataData, int num, int Thr
 		memcpy(arrSelfQueryMataData[i], joinMataData[vecSelfQuery[i]], sizeof(double)*uiDataDimension);
 	}
 
+	//After get selfQuery result we use strategy2 to complete query operation.
 	vector<int> res = joinByStrategy2(arrSelfQueryMataData, uiSelfQueryNum, ThresholdK, timeout);
 
 	for (int i = 0; i < uiJoinNum; i++)
