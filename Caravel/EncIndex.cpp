@@ -107,7 +107,7 @@ void EncIndex::Insert(uint32_t uiLsh, uint32_t uiF, uint32_t uiVal)
 }
 
 void EncIndex::QueryOne(uint32_t uiLsh, uint32_t uiF, vector<uint32_t> &vecResult,
-	uint64_t* TokenTimer, uint64_t * GetTimer)
+	int64_t* TokenTimer, int64_t * GetTimer)
 {
     char szCombine[SHA256_DIGEST_LENGTH];
     char szTD[SHA256_DIGEST_LENGTH];

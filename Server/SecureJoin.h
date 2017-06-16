@@ -62,12 +62,12 @@ public:
 	uint32_t indexMomery = 0;
 
 	//Some Timer 
-	uint64_t perQueryTimerSelfQuery = 0;
-	uint64_t perQueryTimerComputeLSH = 0;
-	uint64_t perQueryTimerComputeToken = 0;
-	uint64_t perQueryTimerGetData = 0;
-	uint64_t perQueryTimerFilter = 0;
-	uint64_t perQueryTimerQuery = 0;
+	int64_t perQueryTimerSelfQuery = 0;
+	int64_t perQueryTimerComputeLSH = 0;
+	int64_t perQueryTimerComputeToken = 0;
+	int64_t perQueryTimerGetData = 0;
+	int64_t perQueryTimerFilter = 0;
+	int64_t perQueryTimerQuery = 0;
 
 
 	//user mate dimension
