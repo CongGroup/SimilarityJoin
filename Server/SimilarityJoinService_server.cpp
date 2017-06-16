@@ -34,6 +34,7 @@ public:
 		string path = "financeNormalize.data";
 		userCount = joinEngine.loadData(path);
 		cout << "Load " << userCount << " data from " << path << endl;
+		//L=250 w=1.5 R=1.21 r=1.1 K=88
 		joinEngine.computeLSH(250, 1.5);
 		joinEngine.buildIndex(userCount);
 	}
