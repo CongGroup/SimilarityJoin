@@ -74,7 +74,8 @@ public:
 
     void Insert(uint32_t uiLsh, uint32_t uiF, uint32_t uiVal);
 
-    void QueryOne(uint32_t uiLsh, uint32_t uiF, vector<uint32_t> &vecResult);
+    void QueryOne(uint32_t uiLsh, uint32_t uiF, vector<uint32_t> &vecResult, 
+		uint64_t* TokenTimer = 0, uint64_t * GetTimer = 0);
 
 	uint32_t getIndexSize();
 

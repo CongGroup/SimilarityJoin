@@ -45,11 +45,11 @@ public:
 	Proportion getDistributedByID(vector<uint32_t> ids);
 	// get user type distribution of whole index
 	Proportion getDistributedofIndex();
-	// excute join operation between a group user mate data and index data in strategy 1
+	// execute join operation between a group user mate data and index data in strategy 1
 	vector<int> joinByStrategy1(double** joinMataData, int num, int ThresholdK, int timeout = INT32_MAX);
-	// excute join operation between a group user mate data and index data in strategy 2
+	// execute join operation between a group user mate data and index data in strategy 2
 	vector<int> joinByStrategy2(double** joinMataData, int num, int ThresholdK, int timeout = INT32_MAX);
-	// excute join operation between a group user mate data and index data in strategy 3
+	// execute join operation between a group user mate data and index data in strategy 3
 	vector<int> joinByStrategy3(double** joinMataData, int num, int ThresholdK, double selfQueryR, int timeout = INT32_MAX);
 
 	//the count of user mate file
@@ -60,6 +60,15 @@ public:
 	uint32_t indexSize = 0;
 	//the count of the index(share) memory size
 	uint32_t indexMomery = 0;
+
+	//Some Timer 
+	uint64_t perQueryTimerSelfQuery = 0;
+	uint64_t perQueryTimerComputeLSH = 0;
+	uint64_t perQueryTimerComputeToken = 0;
+	uint64_t perQueryTimerGetData = 0;
+	uint64_t perQueryTimerFilter = 0;
+	uint64_t perQueryTimerQuery = 0;
+
 
 	//user mate dimension
 	uint32_t uiDataDimension = 0;
@@ -98,7 +107,8 @@ protected:
 	//convert type from int to char
 	char Type2c(int lvl);
 	//make a time stamp
-	int markSecond();
+	uint32_t markSecond(int id = 0);
+	uint32_t markMicroSecond(int id = 0);
 
 protected:
 

@@ -1387,6 +1387,203 @@ uint32_t SimilarityJoinService_GetIndexMetaData_presult::read(::apache::thrift::
 }
 
 
+SimilarityJoinService_GetLatestQueryTime_args::~SimilarityJoinService_GetLatestQueryTime_args() throw() {
+}
+
+
+uint32_t SimilarityJoinService_GetLatestQueryTime_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    xfer += iprot->skip(ftype);
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t SimilarityJoinService_GetLatestQueryTime_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  oprot->incrementRecursionDepth();
+  xfer += oprot->writeStructBegin("SimilarityJoinService_GetLatestQueryTime_args");
+
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  oprot->decrementRecursionDepth();
+  return xfer;
+}
+
+
+SimilarityJoinService_GetLatestQueryTime_pargs::~SimilarityJoinService_GetLatestQueryTime_pargs() throw() {
+}
+
+
+uint32_t SimilarityJoinService_GetLatestQueryTime_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  oprot->incrementRecursionDepth();
+  xfer += oprot->writeStructBegin("SimilarityJoinService_GetLatestQueryTime_pargs");
+
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  oprot->decrementRecursionDepth();
+  return xfer;
+}
+
+
+SimilarityJoinService_GetLatestQueryTime_result::~SimilarityJoinService_GetLatestQueryTime_result() throw() {
+}
+
+
+uint32_t SimilarityJoinService_GetLatestQueryTime_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+        if (ftype == ::apache::thrift::protocol::T_LIST) {
+          {
+            this->success.clear();
+            uint32_t _size94;
+            ::apache::thrift::protocol::TType _etype97;
+            xfer += iprot->readListBegin(_etype97, _size94);
+            this->success.resize(_size94);
+            uint32_t _i98;
+            for (_i98 = 0; _i98 < _size94; ++_i98)
+            {
+              xfer += iprot->readString(this->success[_i98]);
+            }
+            xfer += iprot->readListEnd();
+          }
+          this->__isset.success = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t SimilarityJoinService_GetLatestQueryTime_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+
+  uint32_t xfer = 0;
+
+  xfer += oprot->writeStructBegin("SimilarityJoinService_GetLatestQueryTime_result");
+
+  if (this->__isset.success) {
+    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_LIST, 0);
+    {
+      xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRING, static_cast<uint32_t>(this->success.size()));
+      std::vector<std::string> ::const_iterator _iter99;
+      for (_iter99 = this->success.begin(); _iter99 != this->success.end(); ++_iter99)
+      {
+        xfer += oprot->writeString((*_iter99));
+      }
+      xfer += oprot->writeListEnd();
+    }
+    xfer += oprot->writeFieldEnd();
+  }
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+
+SimilarityJoinService_GetLatestQueryTime_presult::~SimilarityJoinService_GetLatestQueryTime_presult() throw() {
+}
+
+
+uint32_t SimilarityJoinService_GetLatestQueryTime_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+        if (ftype == ::apache::thrift::protocol::T_LIST) {
+          {
+            (*(this->success)).clear();
+            uint32_t _size100;
+            ::apache::thrift::protocol::TType _etype103;
+            xfer += iprot->readListBegin(_etype103, _size100);
+            (*(this->success)).resize(_size100);
+            uint32_t _i104;
+            for (_i104 = 0; _i104 < _size100; ++_i104)
+            {
+              xfer += iprot->readString((*(this->success))[_i104]);
+            }
+            xfer += iprot->readListEnd();
+          }
+          this->__isset.success = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+
 SimilarityJoinService_JoinByStrategy1_args::~SimilarityJoinService_JoinByStrategy1_args() throw() {
 }
 
@@ -1415,14 +1612,14 @@ uint32_t SimilarityJoinService_JoinByStrategy1_args::read(::apache::thrift::prot
         if (ftype == ::apache::thrift::protocol::T_LIST) {
           {
             this->Datas.clear();
-            uint32_t _size94;
-            ::apache::thrift::protocol::TType _etype97;
-            xfer += iprot->readListBegin(_etype97, _size94);
-            this->Datas.resize(_size94);
-            uint32_t _i98;
-            for (_i98 = 0; _i98 < _size94; ++_i98)
+            uint32_t _size105;
+            ::apache::thrift::protocol::TType _etype108;
+            xfer += iprot->readListBegin(_etype108, _size105);
+            this->Datas.resize(_size105);
+            uint32_t _i109;
+            for (_i109 = 0; _i109 < _size105; ++_i109)
             {
-              xfer += iprot->readString(this->Datas[_i98]);
+              xfer += iprot->readString(this->Datas[_i109]);
             }
             xfer += iprot->readListEnd();
           }
@@ -1467,10 +1664,10 @@ uint32_t SimilarityJoinService_JoinByStrategy1_args::write(::apache::thrift::pro
   xfer += oprot->writeFieldBegin("Datas", ::apache::thrift::protocol::T_LIST, 1);
   {
     xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRING, static_cast<uint32_t>(this->Datas.size()));
-    std::vector<std::string> ::const_iterator _iter99;
-    for (_iter99 = this->Datas.begin(); _iter99 != this->Datas.end(); ++_iter99)
+    std::vector<std::string> ::const_iterator _iter110;
+    for (_iter110 = this->Datas.begin(); _iter110 != this->Datas.end(); ++_iter110)
     {
-      xfer += oprot->writeString((*_iter99));
+      xfer += oprot->writeString((*_iter110));
     }
     xfer += oprot->writeListEnd();
   }
@@ -1503,10 +1700,10 @@ uint32_t SimilarityJoinService_JoinByStrategy1_pargs::write(::apache::thrift::pr
   xfer += oprot->writeFieldBegin("Datas", ::apache::thrift::protocol::T_LIST, 1);
   {
     xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRING, static_cast<uint32_t>((*(this->Datas)).size()));
-    std::vector<std::string> ::const_iterator _iter100;
-    for (_iter100 = (*(this->Datas)).begin(); _iter100 != (*(this->Datas)).end(); ++_iter100)
+    std::vector<std::string> ::const_iterator _iter111;
+    for (_iter111 = (*(this->Datas)).begin(); _iter111 != (*(this->Datas)).end(); ++_iter111)
     {
-      xfer += oprot->writeString((*_iter100));
+      xfer += oprot->writeString((*_iter111));
     }
     xfer += oprot->writeListEnd();
   }
@@ -1555,14 +1752,14 @@ uint32_t SimilarityJoinService_JoinByStrategy1_result::read(::apache::thrift::pr
         if (ftype == ::apache::thrift::protocol::T_LIST) {
           {
             this->success.clear();
-            uint32_t _size101;
-            ::apache::thrift::protocol::TType _etype104;
-            xfer += iprot->readListBegin(_etype104, _size101);
-            this->success.resize(_size101);
-            uint32_t _i105;
-            for (_i105 = 0; _i105 < _size101; ++_i105)
+            uint32_t _size112;
+            ::apache::thrift::protocol::TType _etype115;
+            xfer += iprot->readListBegin(_etype115, _size112);
+            this->success.resize(_size112);
+            uint32_t _i116;
+            for (_i116 = 0; _i116 < _size112; ++_i116)
             {
-              xfer += iprot->readI32(this->success[_i105]);
+              xfer += iprot->readI32(this->success[_i116]);
             }
             xfer += iprot->readListEnd();
           }
@@ -1593,10 +1790,10 @@ uint32_t SimilarityJoinService_JoinByStrategy1_result::write(::apache::thrift::p
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_LIST, 0);
     {
       xfer += oprot->writeListBegin(::apache::thrift::protocol::T_I32, static_cast<uint32_t>(this->success.size()));
-      std::vector<int32_t> ::const_iterator _iter106;
-      for (_iter106 = this->success.begin(); _iter106 != this->success.end(); ++_iter106)
+      std::vector<int32_t> ::const_iterator _iter117;
+      for (_iter117 = this->success.begin(); _iter117 != this->success.end(); ++_iter117)
       {
-        xfer += oprot->writeI32((*_iter106));
+        xfer += oprot->writeI32((*_iter117));
       }
       xfer += oprot->writeListEnd();
     }
@@ -1636,14 +1833,14 @@ uint32_t SimilarityJoinService_JoinByStrategy1_presult::read(::apache::thrift::p
         if (ftype == ::apache::thrift::protocol::T_LIST) {
           {
             (*(this->success)).clear();
-            uint32_t _size107;
-            ::apache::thrift::protocol::TType _etype110;
-            xfer += iprot->readListBegin(_etype110, _size107);
-            (*(this->success)).resize(_size107);
-            uint32_t _i111;
-            for (_i111 = 0; _i111 < _size107; ++_i111)
+            uint32_t _size118;
+            ::apache::thrift::protocol::TType _etype121;
+            xfer += iprot->readListBegin(_etype121, _size118);
+            (*(this->success)).resize(_size118);
+            uint32_t _i122;
+            for (_i122 = 0; _i122 < _size118; ++_i122)
             {
-              xfer += iprot->readI32((*(this->success))[_i111]);
+              xfer += iprot->readI32((*(this->success))[_i122]);
             }
             xfer += iprot->readListEnd();
           }
@@ -1693,14 +1890,14 @@ uint32_t SimilarityJoinService_JoinByStrategy2_args::read(::apache::thrift::prot
         if (ftype == ::apache::thrift::protocol::T_LIST) {
           {
             this->Datas.clear();
-            uint32_t _size112;
-            ::apache::thrift::protocol::TType _etype115;
-            xfer += iprot->readListBegin(_etype115, _size112);
-            this->Datas.resize(_size112);
-            uint32_t _i116;
-            for (_i116 = 0; _i116 < _size112; ++_i116)
+            uint32_t _size123;
+            ::apache::thrift::protocol::TType _etype126;
+            xfer += iprot->readListBegin(_etype126, _size123);
+            this->Datas.resize(_size123);
+            uint32_t _i127;
+            for (_i127 = 0; _i127 < _size123; ++_i127)
             {
-              xfer += iprot->readString(this->Datas[_i116]);
+              xfer += iprot->readString(this->Datas[_i127]);
             }
             xfer += iprot->readListEnd();
           }
@@ -1745,10 +1942,10 @@ uint32_t SimilarityJoinService_JoinByStrategy2_args::write(::apache::thrift::pro
   xfer += oprot->writeFieldBegin("Datas", ::apache::thrift::protocol::T_LIST, 1);
   {
     xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRING, static_cast<uint32_t>(this->Datas.size()));
-    std::vector<std::string> ::const_iterator _iter117;
-    for (_iter117 = this->Datas.begin(); _iter117 != this->Datas.end(); ++_iter117)
+    std::vector<std::string> ::const_iterator _iter128;
+    for (_iter128 = this->Datas.begin(); _iter128 != this->Datas.end(); ++_iter128)
     {
-      xfer += oprot->writeString((*_iter117));
+      xfer += oprot->writeString((*_iter128));
     }
     xfer += oprot->writeListEnd();
   }
@@ -1781,10 +1978,10 @@ uint32_t SimilarityJoinService_JoinByStrategy2_pargs::write(::apache::thrift::pr
   xfer += oprot->writeFieldBegin("Datas", ::apache::thrift::protocol::T_LIST, 1);
   {
     xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRING, static_cast<uint32_t>((*(this->Datas)).size()));
-    std::vector<std::string> ::const_iterator _iter118;
-    for (_iter118 = (*(this->Datas)).begin(); _iter118 != (*(this->Datas)).end(); ++_iter118)
+    std::vector<std::string> ::const_iterator _iter129;
+    for (_iter129 = (*(this->Datas)).begin(); _iter129 != (*(this->Datas)).end(); ++_iter129)
     {
-      xfer += oprot->writeString((*_iter118));
+      xfer += oprot->writeString((*_iter129));
     }
     xfer += oprot->writeListEnd();
   }
@@ -1833,14 +2030,14 @@ uint32_t SimilarityJoinService_JoinByStrategy2_result::read(::apache::thrift::pr
         if (ftype == ::apache::thrift::protocol::T_LIST) {
           {
             this->success.clear();
-            uint32_t _size119;
-            ::apache::thrift::protocol::TType _etype122;
-            xfer += iprot->readListBegin(_etype122, _size119);
-            this->success.resize(_size119);
-            uint32_t _i123;
-            for (_i123 = 0; _i123 < _size119; ++_i123)
+            uint32_t _size130;
+            ::apache::thrift::protocol::TType _etype133;
+            xfer += iprot->readListBegin(_etype133, _size130);
+            this->success.resize(_size130);
+            uint32_t _i134;
+            for (_i134 = 0; _i134 < _size130; ++_i134)
             {
-              xfer += iprot->readI32(this->success[_i123]);
+              xfer += iprot->readI32(this->success[_i134]);
             }
             xfer += iprot->readListEnd();
           }
@@ -1871,10 +2068,10 @@ uint32_t SimilarityJoinService_JoinByStrategy2_result::write(::apache::thrift::p
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_LIST, 0);
     {
       xfer += oprot->writeListBegin(::apache::thrift::protocol::T_I32, static_cast<uint32_t>(this->success.size()));
-      std::vector<int32_t> ::const_iterator _iter124;
-      for (_iter124 = this->success.begin(); _iter124 != this->success.end(); ++_iter124)
+      std::vector<int32_t> ::const_iterator _iter135;
+      for (_iter135 = this->success.begin(); _iter135 != this->success.end(); ++_iter135)
       {
-        xfer += oprot->writeI32((*_iter124));
+        xfer += oprot->writeI32((*_iter135));
       }
       xfer += oprot->writeListEnd();
     }
@@ -1914,14 +2111,14 @@ uint32_t SimilarityJoinService_JoinByStrategy2_presult::read(::apache::thrift::p
         if (ftype == ::apache::thrift::protocol::T_LIST) {
           {
             (*(this->success)).clear();
-            uint32_t _size125;
-            ::apache::thrift::protocol::TType _etype128;
-            xfer += iprot->readListBegin(_etype128, _size125);
-            (*(this->success)).resize(_size125);
-            uint32_t _i129;
-            for (_i129 = 0; _i129 < _size125; ++_i129)
+            uint32_t _size136;
+            ::apache::thrift::protocol::TType _etype139;
+            xfer += iprot->readListBegin(_etype139, _size136);
+            (*(this->success)).resize(_size136);
+            uint32_t _i140;
+            for (_i140 = 0; _i140 < _size136; ++_i140)
             {
-              xfer += iprot->readI32((*(this->success))[_i129]);
+              xfer += iprot->readI32((*(this->success))[_i140]);
             }
             xfer += iprot->readListEnd();
           }
@@ -1971,14 +2168,14 @@ uint32_t SimilarityJoinService_JoinByStrategy3_args::read(::apache::thrift::prot
         if (ftype == ::apache::thrift::protocol::T_LIST) {
           {
             this->Datas.clear();
-            uint32_t _size130;
-            ::apache::thrift::protocol::TType _etype133;
-            xfer += iprot->readListBegin(_etype133, _size130);
-            this->Datas.resize(_size130);
-            uint32_t _i134;
-            for (_i134 = 0; _i134 < _size130; ++_i134)
+            uint32_t _size141;
+            ::apache::thrift::protocol::TType _etype144;
+            xfer += iprot->readListBegin(_etype144, _size141);
+            this->Datas.resize(_size141);
+            uint32_t _i145;
+            for (_i145 = 0; _i145 < _size141; ++_i145)
             {
-              xfer += iprot->readString(this->Datas[_i134]);
+              xfer += iprot->readString(this->Datas[_i145]);
             }
             xfer += iprot->readListEnd();
           }
@@ -2031,10 +2228,10 @@ uint32_t SimilarityJoinService_JoinByStrategy3_args::write(::apache::thrift::pro
   xfer += oprot->writeFieldBegin("Datas", ::apache::thrift::protocol::T_LIST, 1);
   {
     xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRING, static_cast<uint32_t>(this->Datas.size()));
-    std::vector<std::string> ::const_iterator _iter135;
-    for (_iter135 = this->Datas.begin(); _iter135 != this->Datas.end(); ++_iter135)
+    std::vector<std::string> ::const_iterator _iter146;
+    for (_iter146 = this->Datas.begin(); _iter146 != this->Datas.end(); ++_iter146)
     {
-      xfer += oprot->writeString((*_iter135));
+      xfer += oprot->writeString((*_iter146));
     }
     xfer += oprot->writeListEnd();
   }
@@ -2071,10 +2268,10 @@ uint32_t SimilarityJoinService_JoinByStrategy3_pargs::write(::apache::thrift::pr
   xfer += oprot->writeFieldBegin("Datas", ::apache::thrift::protocol::T_LIST, 1);
   {
     xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRING, static_cast<uint32_t>((*(this->Datas)).size()));
-    std::vector<std::string> ::const_iterator _iter136;
-    for (_iter136 = (*(this->Datas)).begin(); _iter136 != (*(this->Datas)).end(); ++_iter136)
+    std::vector<std::string> ::const_iterator _iter147;
+    for (_iter147 = (*(this->Datas)).begin(); _iter147 != (*(this->Datas)).end(); ++_iter147)
     {
-      xfer += oprot->writeString((*_iter136));
+      xfer += oprot->writeString((*_iter147));
     }
     xfer += oprot->writeListEnd();
   }
@@ -2127,14 +2324,14 @@ uint32_t SimilarityJoinService_JoinByStrategy3_result::read(::apache::thrift::pr
         if (ftype == ::apache::thrift::protocol::T_LIST) {
           {
             this->success.clear();
-            uint32_t _size137;
-            ::apache::thrift::protocol::TType _etype140;
-            xfer += iprot->readListBegin(_etype140, _size137);
-            this->success.resize(_size137);
-            uint32_t _i141;
-            for (_i141 = 0; _i141 < _size137; ++_i141)
+            uint32_t _size148;
+            ::apache::thrift::protocol::TType _etype151;
+            xfer += iprot->readListBegin(_etype151, _size148);
+            this->success.resize(_size148);
+            uint32_t _i152;
+            for (_i152 = 0; _i152 < _size148; ++_i152)
             {
-              xfer += iprot->readI32(this->success[_i141]);
+              xfer += iprot->readI32(this->success[_i152]);
             }
             xfer += iprot->readListEnd();
           }
@@ -2165,10 +2362,10 @@ uint32_t SimilarityJoinService_JoinByStrategy3_result::write(::apache::thrift::p
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_LIST, 0);
     {
       xfer += oprot->writeListBegin(::apache::thrift::protocol::T_I32, static_cast<uint32_t>(this->success.size()));
-      std::vector<int32_t> ::const_iterator _iter142;
-      for (_iter142 = this->success.begin(); _iter142 != this->success.end(); ++_iter142)
+      std::vector<int32_t> ::const_iterator _iter153;
+      for (_iter153 = this->success.begin(); _iter153 != this->success.end(); ++_iter153)
       {
-        xfer += oprot->writeI32((*_iter142));
+        xfer += oprot->writeI32((*_iter153));
       }
       xfer += oprot->writeListEnd();
     }
@@ -2208,14 +2405,14 @@ uint32_t SimilarityJoinService_JoinByStrategy3_presult::read(::apache::thrift::p
         if (ftype == ::apache::thrift::protocol::T_LIST) {
           {
             (*(this->success)).clear();
-            uint32_t _size143;
-            ::apache::thrift::protocol::TType _etype146;
-            xfer += iprot->readListBegin(_etype146, _size143);
-            (*(this->success)).resize(_size143);
-            uint32_t _i147;
-            for (_i147 = 0; _i147 < _size143; ++_i147)
+            uint32_t _size154;
+            ::apache::thrift::protocol::TType _etype157;
+            xfer += iprot->readListBegin(_etype157, _size154);
+            (*(this->success)).resize(_size154);
+            uint32_t _i158;
+            for (_i158 = 0; _i158 < _size154; ++_i158)
             {
-              xfer += iprot->readI32((*(this->success))[_i147]);
+              xfer += iprot->readI32((*(this->success))[_i158]);
             }
             xfer += iprot->readListEnd();
           }
@@ -2580,6 +2777,63 @@ void SimilarityJoinServiceClient::recv_GetIndexMetaData(std::vector<std::string>
     return;
   }
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "GetIndexMetaData failed: unknown result");
+}
+
+void SimilarityJoinServiceClient::GetLatestQueryTime(std::vector<std::string> & _return)
+{
+  send_GetLatestQueryTime();
+  recv_GetLatestQueryTime(_return);
+}
+
+void SimilarityJoinServiceClient::send_GetLatestQueryTime()
+{
+  int32_t cseqid = 0;
+  oprot_->writeMessageBegin("GetLatestQueryTime", ::apache::thrift::protocol::T_CALL, cseqid);
+
+  SimilarityJoinService_GetLatestQueryTime_pargs args;
+  args.write(oprot_);
+
+  oprot_->writeMessageEnd();
+  oprot_->getTransport()->writeEnd();
+  oprot_->getTransport()->flush();
+}
+
+void SimilarityJoinServiceClient::recv_GetLatestQueryTime(std::vector<std::string> & _return)
+{
+
+  int32_t rseqid = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TMessageType mtype;
+
+  iprot_->readMessageBegin(fname, mtype, rseqid);
+  if (mtype == ::apache::thrift::protocol::T_EXCEPTION) {
+    ::apache::thrift::TApplicationException x;
+    x.read(iprot_);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+    throw x;
+  }
+  if (mtype != ::apache::thrift::protocol::T_REPLY) {
+    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+  }
+  if (fname.compare("GetLatestQueryTime") != 0) {
+    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+  }
+  SimilarityJoinService_GetLatestQueryTime_presult result;
+  result.success = &_return;
+  result.read(iprot_);
+  iprot_->readMessageEnd();
+  iprot_->getTransport()->readEnd();
+
+  if (result.__isset.success) {
+    // _return pointer has now been filled
+    return;
+  }
+  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "GetLatestQueryTime failed: unknown result");
 }
 
 void SimilarityJoinServiceClient::JoinByStrategy1(std::vector<int32_t> & _return, const std::vector<std::string> & Datas, const int32_t ThresholdK, const int32_t TimeOut)
@@ -3103,6 +3357,60 @@ void SimilarityJoinServiceProcessor::process_GetIndexMetaData(int32_t seqid, ::a
 
   if (this->eventHandler_.get() != NULL) {
     this->eventHandler_->postWrite(ctx, "SimilarityJoinService.GetIndexMetaData", bytes);
+  }
+}
+
+void SimilarityJoinServiceProcessor::process_GetLatestQueryTime(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+{
+  void* ctx = NULL;
+  if (this->eventHandler_.get() != NULL) {
+    ctx = this->eventHandler_->getContext("SimilarityJoinService.GetLatestQueryTime", callContext);
+  }
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "SimilarityJoinService.GetLatestQueryTime");
+
+  if (this->eventHandler_.get() != NULL) {
+    this->eventHandler_->preRead(ctx, "SimilarityJoinService.GetLatestQueryTime");
+  }
+
+  SimilarityJoinService_GetLatestQueryTime_args args;
+  args.read(iprot);
+  iprot->readMessageEnd();
+  uint32_t bytes = iprot->getTransport()->readEnd();
+
+  if (this->eventHandler_.get() != NULL) {
+    this->eventHandler_->postRead(ctx, "SimilarityJoinService.GetLatestQueryTime", bytes);
+  }
+
+  SimilarityJoinService_GetLatestQueryTime_result result;
+  try {
+    iface_->GetLatestQueryTime(result.success);
+    result.__isset.success = true;
+  } catch (const std::exception& e) {
+    if (this->eventHandler_.get() != NULL) {
+      this->eventHandler_->handlerError(ctx, "SimilarityJoinService.GetLatestQueryTime");
+    }
+
+    ::apache::thrift::TApplicationException x(e.what());
+    oprot->writeMessageBegin("GetLatestQueryTime", ::apache::thrift::protocol::T_EXCEPTION, seqid);
+    x.write(oprot);
+    oprot->writeMessageEnd();
+    oprot->getTransport()->writeEnd();
+    oprot->getTransport()->flush();
+    return;
+  }
+
+  if (this->eventHandler_.get() != NULL) {
+    this->eventHandler_->preWrite(ctx, "SimilarityJoinService.GetLatestQueryTime");
+  }
+
+  oprot->writeMessageBegin("GetLatestQueryTime", ::apache::thrift::protocol::T_REPLY, seqid);
+  result.write(oprot);
+  oprot->writeMessageEnd();
+  bytes = oprot->getTransport()->writeEnd();
+  oprot->getTransport()->flush();
+
+  if (this->eventHandler_.get() != NULL) {
+    this->eventHandler_->postWrite(ctx, "SimilarityJoinService.GetLatestQueryTime", bytes);
   }
 }
 

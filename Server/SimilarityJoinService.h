@@ -21,6 +21,7 @@ class SimilarityJoinServiceIf {
   virtual void QueryTypeByData(std::vector<std::string> & _return, const std::vector<std::string> & Datas) = 0;
   virtual void GetIndexDistributed(std::vector<int32_t> & _return) = 0;
   virtual void GetIndexMetaData(std::vector<std::string> & _return) = 0;
+  virtual void GetLatestQueryTime(std::vector<std::string> & _return) = 0;
   virtual void JoinByStrategy1(std::vector<int32_t> & _return, const std::vector<std::string> & Datas, const int32_t ThresholdK, const int32_t TimeOut) = 0;
   virtual void JoinByStrategy2(std::vector<int32_t> & _return, const std::vector<std::string> & Datas, const int32_t ThresholdK, const int32_t TimeOut) = 0;
   virtual void JoinByStrategy3(std::vector<int32_t> & _return, const std::vector<std::string> & Datas, const int32_t ThresholdK, const int32_t TimeOut, const double SelfQueryR) = 0;
@@ -69,6 +70,9 @@ class SimilarityJoinServiceNull : virtual public SimilarityJoinServiceIf {
     return;
   }
   void GetIndexMetaData(std::vector<std::string> & /* _return */) {
+    return;
+  }
+  void GetLatestQueryTime(std::vector<std::string> & /* _return */) {
     return;
   }
   void JoinByStrategy1(std::vector<int32_t> & /* _return */, const std::vector<std::string> & /* Datas */, const int32_t /* ThresholdK */, const int32_t /* TimeOut */) {
@@ -778,6 +782,114 @@ class SimilarityJoinService_GetIndexMetaData_presult {
   friend std::ostream& operator<<(std::ostream& out, const SimilarityJoinService_GetIndexMetaData_presult& obj);
 };
 
+
+class SimilarityJoinService_GetLatestQueryTime_args {
+ public:
+
+  static const char* ascii_fingerprint; // = "99914B932BD37A50B983C5E7C90AE93B";
+  static const uint8_t binary_fingerprint[16]; // = {0x99,0x91,0x4B,0x93,0x2B,0xD3,0x7A,0x50,0xB9,0x83,0xC5,0xE7,0xC9,0x0A,0xE9,0x3B};
+
+  SimilarityJoinService_GetLatestQueryTime_args(const SimilarityJoinService_GetLatestQueryTime_args&);
+  SimilarityJoinService_GetLatestQueryTime_args& operator=(const SimilarityJoinService_GetLatestQueryTime_args&);
+  SimilarityJoinService_GetLatestQueryTime_args() {
+  }
+
+  virtual ~SimilarityJoinService_GetLatestQueryTime_args() throw();
+
+  bool operator == (const SimilarityJoinService_GetLatestQueryTime_args & /* rhs */) const
+  {
+    return true;
+  }
+  bool operator != (const SimilarityJoinService_GetLatestQueryTime_args &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const SimilarityJoinService_GetLatestQueryTime_args & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+  friend std::ostream& operator<<(std::ostream& out, const SimilarityJoinService_GetLatestQueryTime_args& obj);
+};
+
+
+class SimilarityJoinService_GetLatestQueryTime_pargs {
+ public:
+
+  static const char* ascii_fingerprint; // = "99914B932BD37A50B983C5E7C90AE93B";
+  static const uint8_t binary_fingerprint[16]; // = {0x99,0x91,0x4B,0x93,0x2B,0xD3,0x7A,0x50,0xB9,0x83,0xC5,0xE7,0xC9,0x0A,0xE9,0x3B};
+
+
+  virtual ~SimilarityJoinService_GetLatestQueryTime_pargs() throw();
+
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+  friend std::ostream& operator<<(std::ostream& out, const SimilarityJoinService_GetLatestQueryTime_pargs& obj);
+};
+
+typedef struct _SimilarityJoinService_GetLatestQueryTime_result__isset {
+  _SimilarityJoinService_GetLatestQueryTime_result__isset() : success(false) {}
+  bool success :1;
+} _SimilarityJoinService_GetLatestQueryTime_result__isset;
+
+class SimilarityJoinService_GetLatestQueryTime_result {
+ public:
+
+  static const char* ascii_fingerprint; // = "C844643081B14EA3A81E57199FB2B504";
+  static const uint8_t binary_fingerprint[16]; // = {0xC8,0x44,0x64,0x30,0x81,0xB1,0x4E,0xA3,0xA8,0x1E,0x57,0x19,0x9F,0xB2,0xB5,0x04};
+
+  SimilarityJoinService_GetLatestQueryTime_result(const SimilarityJoinService_GetLatestQueryTime_result&);
+  SimilarityJoinService_GetLatestQueryTime_result& operator=(const SimilarityJoinService_GetLatestQueryTime_result&);
+  SimilarityJoinService_GetLatestQueryTime_result() {
+  }
+
+  virtual ~SimilarityJoinService_GetLatestQueryTime_result() throw();
+  std::vector<std::string>  success;
+
+  _SimilarityJoinService_GetLatestQueryTime_result__isset __isset;
+
+  void __set_success(const std::vector<std::string> & val);
+
+  bool operator == (const SimilarityJoinService_GetLatestQueryTime_result & rhs) const
+  {
+    if (!(success == rhs.success))
+      return false;
+    return true;
+  }
+  bool operator != (const SimilarityJoinService_GetLatestQueryTime_result &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const SimilarityJoinService_GetLatestQueryTime_result & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+  friend std::ostream& operator<<(std::ostream& out, const SimilarityJoinService_GetLatestQueryTime_result& obj);
+};
+
+typedef struct _SimilarityJoinService_GetLatestQueryTime_presult__isset {
+  _SimilarityJoinService_GetLatestQueryTime_presult__isset() : success(false) {}
+  bool success :1;
+} _SimilarityJoinService_GetLatestQueryTime_presult__isset;
+
+class SimilarityJoinService_GetLatestQueryTime_presult {
+ public:
+
+  static const char* ascii_fingerprint; // = "C844643081B14EA3A81E57199FB2B504";
+  static const uint8_t binary_fingerprint[16]; // = {0xC8,0x44,0x64,0x30,0x81,0xB1,0x4E,0xA3,0xA8,0x1E,0x57,0x19,0x9F,0xB2,0xB5,0x04};
+
+
+  virtual ~SimilarityJoinService_GetLatestQueryTime_presult() throw();
+  std::vector<std::string> * success;
+
+  _SimilarityJoinService_GetLatestQueryTime_presult__isset __isset;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+
+  friend std::ostream& operator<<(std::ostream& out, const SimilarityJoinService_GetLatestQueryTime_presult& obj);
+};
+
 typedef struct _SimilarityJoinService_JoinByStrategy1_args__isset {
   _SimilarityJoinService_JoinByStrategy1_args__isset() : Datas(false), ThresholdK(false), TimeOut(false) {}
   bool Datas :1;
@@ -1230,6 +1342,9 @@ class SimilarityJoinServiceClient : virtual public SimilarityJoinServiceIf {
   void GetIndexMetaData(std::vector<std::string> & _return);
   void send_GetIndexMetaData();
   void recv_GetIndexMetaData(std::vector<std::string> & _return);
+  void GetLatestQueryTime(std::vector<std::string> & _return);
+  void send_GetLatestQueryTime();
+  void recv_GetLatestQueryTime(std::vector<std::string> & _return);
   void JoinByStrategy1(std::vector<int32_t> & _return, const std::vector<std::string> & Datas, const int32_t ThresholdK, const int32_t TimeOut);
   void send_JoinByStrategy1(const std::vector<std::string> & Datas, const int32_t ThresholdK, const int32_t TimeOut);
   void recv_JoinByStrategy1(std::vector<int32_t> & _return);
@@ -1260,6 +1375,7 @@ class SimilarityJoinServiceProcessor : public ::apache::thrift::TDispatchProcess
   void process_QueryTypeByData(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_GetIndexDistributed(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_GetIndexMetaData(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
+  void process_GetLatestQueryTime(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_JoinByStrategy1(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_JoinByStrategy2(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_JoinByStrategy3(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
@@ -1272,6 +1388,7 @@ class SimilarityJoinServiceProcessor : public ::apache::thrift::TDispatchProcess
     processMap_["QueryTypeByData"] = &SimilarityJoinServiceProcessor::process_QueryTypeByData;
     processMap_["GetIndexDistributed"] = &SimilarityJoinServiceProcessor::process_GetIndexDistributed;
     processMap_["GetIndexMetaData"] = &SimilarityJoinServiceProcessor::process_GetIndexMetaData;
+    processMap_["GetLatestQueryTime"] = &SimilarityJoinServiceProcessor::process_GetLatestQueryTime;
     processMap_["JoinByStrategy1"] = &SimilarityJoinServiceProcessor::process_JoinByStrategy1;
     processMap_["JoinByStrategy2"] = &SimilarityJoinServiceProcessor::process_JoinByStrategy2;
     processMap_["JoinByStrategy3"] = &SimilarityJoinServiceProcessor::process_JoinByStrategy3;
@@ -1360,6 +1477,16 @@ class SimilarityJoinServiceMultiface : virtual public SimilarityJoinServiceIf {
       ifaces_[i]->GetIndexMetaData(_return);
     }
     ifaces_[i]->GetIndexMetaData(_return);
+    return;
+  }
+
+  void GetLatestQueryTime(std::vector<std::string> & _return) {
+    size_t sz = ifaces_.size();
+    size_t i = 0;
+    for (; i < (sz - 1); ++i) {
+      ifaces_[i]->GetLatestQueryTime(_return);
+    }
+    ifaces_[i]->GetLatestQueryTime(_return);
     return;
   }
 

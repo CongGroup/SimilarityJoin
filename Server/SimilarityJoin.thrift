@@ -26,6 +26,9 @@ service SimilarityJoinService
 	//ReslSize Capacity MemorySize SystemMemory
 	list<string> GetIndexMetaData     ();
 
+	//SelfQuery LSH Token GetData FilterK TotalQuery
+	list<string> GetLatestQueryTime     ();
+
 	//use data and return id
 	list<i32>    JoinByStrategy1      (1: list<string> Datas, 2: i32 ThresholdK, 3: i32 TimeOut);
 

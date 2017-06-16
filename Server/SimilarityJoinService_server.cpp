@@ -28,7 +28,7 @@ protected:
 
 
 public:
-	SimilarityJoinServiceHandler() 
+	SimilarityJoinServiceHandler()
 	{
 		srand(0);
 		string path = "financeNormalize.data";
@@ -38,7 +38,7 @@ public:
 		joinEngine.buildIndex(userCount);
 	}
 
-	void QueryDataByID(std::vector<std::string> & _return, const std::vector<int32_t> & UserIDs) 
+	void QueryDataByID(std::vector<std::string> & _return, const std::vector<int32_t> & UserIDs)
 	{
 		for (auto i = UserIDs.begin(); i != UserIDs.end(); i++)
 		{
@@ -46,7 +46,7 @@ public:
 		}
 	}
 
-	void QueryTypeByID(std::vector<std::string> & _return, const std::vector<int32_t> & UserIDs) 
+	void QueryTypeByID(std::vector<std::string> & _return, const std::vector<int32_t> & UserIDs)
 	{
 		for (auto i = UserIDs.begin(); i != UserIDs.end(); i++)
 		{
@@ -54,7 +54,7 @@ public:
 		}
 	}
 
-	void QueryDistributedByID(std::vector<int32_t> & _return, const std::vector<int32_t> & UserIDs) 
+	void QueryDistributedByID(std::vector<int32_t> & _return, const std::vector<int32_t> & UserIDs)
 	{
 		vector<uint32_t> unUserIDs;
 		for (auto i = UserIDs.begin(); i != UserIDs.end(); i++)
@@ -68,7 +68,7 @@ public:
 		}
 	}
 
-	void QueryTypeByData(std::vector<std::string> & _return, const std::vector<std::string> & Datas) 
+	void QueryTypeByData(std::vector<std::string> & _return, const std::vector<std::string> & Datas)
 	{
 		int dimension = joinEngine.uiFinanceDimension;
 		double* buffer = new double[dimension];
@@ -79,7 +79,7 @@ public:
 			tmpVecStr.clear();
 			joinEngine.splitString(*i, tmpVecStr, " ");
 			memset(buffer, 0, sizeof(double)*dimension);
-			for (int j = 0; j < dimension && j<tmpVecStr.size(); j++)
+			for (int j = 0; j < dimension && j < tmpVecStr.size(); j++)
 			{
 				buffer[j] = stod(tmpVecStr[j]);
 			}
@@ -97,14 +97,24 @@ public:
 		}
 	}
 
-	void GetIndexMetaData(std::vector<std::string> & _return) 
+	void GetIndexMetaData(std::vector<std::string> & _return)
 	{
 		_return.push_back(to_string(joinEngine.uiUserNum));
 		_return.push_back(to_string(joinEngine.indexSize));
 		//2142639360 bytes
 		_return.push_back(to_string(joinEngine.indexMomery / 1024 / 1024));
 		//16433180Kb memory
-		_return.push_back(to_string(16433180/1024));
+		_return.push_back(to_string(16433180 / 1024));
+	}
+
+	void GetLatestQueryTime(std::vector<std::string> & _return)
+	{
+		_return.push_back(to_string(joinEngine.perQueryTimerSelfQuery));
+		_return.push_back(to_string(joinEngine.perQueryTimerComputeLSH));
+		_return.push_back(to_string(joinEngine.perQueryTimerComputeToken));
+		_return.push_back(to_string(joinEngine.perQueryTimerGetData));
+		_return.push_back(to_string(joinEngine.perQueryTimerFilter));
+		_return.push_back(to_string(joinEngine.perQueryTimerQuery));
 	}
 
 	void JoinByStrategy1(std::vector<int32_t> & _return, const std::vector<std::string> & Datas, const int32_t ThresholdK, const int32_t TimeOut) {
@@ -119,7 +129,7 @@ public:
 		{
 			buffer[i] = new double[dimension];
 		}
-		
+
 		vector<string> tmpVecStr;
 		for (int i = 0; i < querySize; i++)
 		{

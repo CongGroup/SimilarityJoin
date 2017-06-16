@@ -47,6 +47,11 @@ public partial class SimilarityJoinService {
     IAsyncResult Begin_GetIndexMetaData(AsyncCallback callback, object state);
     List<string> End_GetIndexMetaData(IAsyncResult asyncResult);
     #endif
+    List<string> GetLatestQueryTime();
+    #if SILVERLIGHT
+    IAsyncResult Begin_GetLatestQueryTime(AsyncCallback callback, object state);
+    List<string> End_GetLatestQueryTime(IAsyncResult asyncResult);
+    #endif
     List<int> JoinByStrategy1(List<string> Datas, int ThresholdK, int TimeOut);
     #if SILVERLIGHT
     IAsyncResult Begin_JoinByStrategy1(AsyncCallback callback, object state, List<string> Datas, int ThresholdK, int TimeOut);
@@ -492,6 +497,67 @@ public partial class SimilarityJoinService {
 
     
     #if SILVERLIGHT
+    public IAsyncResult Begin_GetLatestQueryTime(AsyncCallback callback, object state)
+    {
+      return send_GetLatestQueryTime(callback, state);
+    }
+
+    public List<string> End_GetLatestQueryTime(IAsyncResult asyncResult)
+    {
+      oprot_.Transport.EndFlush(asyncResult);
+      return recv_GetLatestQueryTime();
+    }
+
+    #endif
+
+    public List<string> GetLatestQueryTime()
+    {
+      #if !SILVERLIGHT
+      send_GetLatestQueryTime();
+      return recv_GetLatestQueryTime();
+
+      #else
+      var asyncResult = Begin_GetLatestQueryTime(null, null);
+      return End_GetLatestQueryTime(asyncResult);
+
+      #endif
+    }
+    #if SILVERLIGHT
+    public IAsyncResult send_GetLatestQueryTime(AsyncCallback callback, object state)
+    #else
+    public void send_GetLatestQueryTime()
+    #endif
+    {
+      oprot_.WriteMessageBegin(new TMessage("GetLatestQueryTime", TMessageType.Call, seqid_));
+      GetLatestQueryTime_args args = new GetLatestQueryTime_args();
+      args.Write(oprot_);
+      oprot_.WriteMessageEnd();
+      #if SILVERLIGHT
+      return oprot_.Transport.BeginFlush(callback, state);
+      #else
+      oprot_.Transport.Flush();
+      #endif
+    }
+
+    public List<string> recv_GetLatestQueryTime()
+    {
+      TMessage msg = iprot_.ReadMessageBegin();
+      if (msg.Type == TMessageType.Exception) {
+        TApplicationException x = TApplicationException.Read(iprot_);
+        iprot_.ReadMessageEnd();
+        throw x;
+      }
+      GetLatestQueryTime_result result = new GetLatestQueryTime_result();
+      result.Read(iprot_);
+      iprot_.ReadMessageEnd();
+      if (result.__isset.success) {
+        return result.Success;
+      }
+      throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "GetLatestQueryTime failed: unknown result");
+    }
+
+    
+    #if SILVERLIGHT
     public IAsyncResult Begin_JoinByStrategy1(AsyncCallback callback, object state, List<string> Datas, int ThresholdK, int TimeOut)
     {
       return send_JoinByStrategy1(callback, state, Datas, ThresholdK, TimeOut);
@@ -694,6 +760,7 @@ public partial class SimilarityJoinService {
       processMap_["QueryTypeByData"] = QueryTypeByData_Process;
       processMap_["GetIndexDistributed"] = GetIndexDistributed_Process;
       processMap_["GetIndexMetaData"] = GetIndexMetaData_Process;
+      processMap_["GetLatestQueryTime"] = GetLatestQueryTime_Process;
       processMap_["JoinByStrategy1"] = JoinByStrategy1_Process;
       processMap_["JoinByStrategy2"] = JoinByStrategy2_Process;
       processMap_["JoinByStrategy3"] = JoinByStrategy3_Process;
@@ -802,6 +869,19 @@ public partial class SimilarityJoinService {
       GetIndexMetaData_result result = new GetIndexMetaData_result();
       result.Success = iface_.GetIndexMetaData();
       oprot.WriteMessageBegin(new TMessage("GetIndexMetaData", TMessageType.Reply, seqid)); 
+      result.Write(oprot);
+      oprot.WriteMessageEnd();
+      oprot.Transport.Flush();
+    }
+
+    public void GetLatestQueryTime_Process(int seqid, TProtocol iprot, TProtocol oprot)
+    {
+      GetLatestQueryTime_args args = new GetLatestQueryTime_args();
+      args.Read(iprot);
+      iprot.ReadMessageEnd();
+      GetLatestQueryTime_result result = new GetLatestQueryTime_result();
+      result.Success = iface_.GetLatestQueryTime();
+      oprot.WriteMessageBegin(new TMessage("GetLatestQueryTime", TMessageType.Reply, seqid)); 
       result.Write(oprot);
       oprot.WriteMessageEnd();
       oprot.Transport.Flush();
@@ -2052,6 +2132,164 @@ public partial class SimilarityJoinService {
   #if !SILVERLIGHT
   [Serializable]
   #endif
+  public partial class GetLatestQueryTime_args : TBase
+  {
+
+    public GetLatestQueryTime_args() {
+    }
+
+    public void Read (TProtocol iprot)
+    {
+      TField field;
+      iprot.ReadStructBegin();
+      while (true)
+      {
+        field = iprot.ReadFieldBegin();
+        if (field.Type == TType.Stop) { 
+          break;
+        }
+        switch (field.ID)
+        {
+          default: 
+            TProtocolUtil.Skip(iprot, field.Type);
+            break;
+        }
+        iprot.ReadFieldEnd();
+      }
+      iprot.ReadStructEnd();
+    }
+
+    public void Write(TProtocol oprot) {
+      TStruct struc = new TStruct("GetLatestQueryTime_args");
+      oprot.WriteStructBegin(struc);
+      oprot.WriteFieldStop();
+      oprot.WriteStructEnd();
+    }
+
+    public override string ToString() {
+      StringBuilder __sb = new StringBuilder("GetLatestQueryTime_args(");
+      __sb.Append(")");
+      return __sb.ToString();
+    }
+
+  }
+
+
+  #if !SILVERLIGHT
+  [Serializable]
+  #endif
+  public partial class GetLatestQueryTime_result : TBase
+  {
+    private List<string> _success;
+
+    public List<string> Success
+    {
+      get
+      {
+        return _success;
+      }
+      set
+      {
+        __isset.success = true;
+        this._success = value;
+      }
+    }
+
+
+    public Isset __isset;
+    #if !SILVERLIGHT
+    [Serializable]
+    #endif
+    public struct Isset {
+      public bool success;
+    }
+
+    public GetLatestQueryTime_result() {
+    }
+
+    public void Read (TProtocol iprot)
+    {
+      TField field;
+      iprot.ReadStructBegin();
+      while (true)
+      {
+        field = iprot.ReadFieldBegin();
+        if (field.Type == TType.Stop) { 
+          break;
+        }
+        switch (field.ID)
+        {
+          case 0:
+            if (field.Type == TType.List) {
+              {
+                Success = new List<string>();
+                TList _list40 = iprot.ReadListBegin();
+                for( int _i41 = 0; _i41 < _list40.Count; ++_i41)
+                {
+                  string _elem42;
+                  _elem42 = iprot.ReadString();
+                  Success.Add(_elem42);
+                }
+                iprot.ReadListEnd();
+              }
+            } else { 
+              TProtocolUtil.Skip(iprot, field.Type);
+            }
+            break;
+          default: 
+            TProtocolUtil.Skip(iprot, field.Type);
+            break;
+        }
+        iprot.ReadFieldEnd();
+      }
+      iprot.ReadStructEnd();
+    }
+
+    public void Write(TProtocol oprot) {
+      TStruct struc = new TStruct("GetLatestQueryTime_result");
+      oprot.WriteStructBegin(struc);
+      TField field = new TField();
+
+      if (this.__isset.success) {
+        if (Success != null) {
+          field.Name = "Success";
+          field.Type = TType.List;
+          field.ID = 0;
+          oprot.WriteFieldBegin(field);
+          {
+            oprot.WriteListBegin(new TList(TType.String, Success.Count));
+            foreach (string _iter43 in Success)
+            {
+              oprot.WriteString(_iter43);
+            }
+            oprot.WriteListEnd();
+          }
+          oprot.WriteFieldEnd();
+        }
+      }
+      oprot.WriteFieldStop();
+      oprot.WriteStructEnd();
+    }
+
+    public override string ToString() {
+      StringBuilder __sb = new StringBuilder("GetLatestQueryTime_result(");
+      bool __first = true;
+      if (Success != null && __isset.success) {
+        if(!__first) { __sb.Append(", "); }
+        __first = false;
+        __sb.Append("Success: ");
+        __sb.Append(Success);
+      }
+      __sb.Append(")");
+      return __sb.ToString();
+    }
+
+  }
+
+
+  #if !SILVERLIGHT
+  [Serializable]
+  #endif
   public partial class JoinByStrategy1_args : TBase
   {
     private List<string> _Datas;
@@ -2127,12 +2365,12 @@ public partial class SimilarityJoinService {
             if (field.Type == TType.List) {
               {
                 Datas = new List<string>();
-                TList _list40 = iprot.ReadListBegin();
-                for( int _i41 = 0; _i41 < _list40.Count; ++_i41)
+                TList _list44 = iprot.ReadListBegin();
+                for( int _i45 = 0; _i45 < _list44.Count; ++_i45)
                 {
-                  string _elem42;
-                  _elem42 = iprot.ReadString();
-                  Datas.Add(_elem42);
+                  string _elem46;
+                  _elem46 = iprot.ReadString();
+                  Datas.Add(_elem46);
                 }
                 iprot.ReadListEnd();
               }
@@ -2174,9 +2412,9 @@ public partial class SimilarityJoinService {
         oprot.WriteFieldBegin(field);
         {
           oprot.WriteListBegin(new TList(TType.String, Datas.Count));
-          foreach (string _iter43 in Datas)
+          foreach (string _iter47 in Datas)
           {
-            oprot.WriteString(_iter43);
+            oprot.WriteString(_iter47);
           }
           oprot.WriteListEnd();
         }
@@ -2278,12 +2516,12 @@ public partial class SimilarityJoinService {
             if (field.Type == TType.List) {
               {
                 Success = new List<int>();
-                TList _list44 = iprot.ReadListBegin();
-                for( int _i45 = 0; _i45 < _list44.Count; ++_i45)
+                TList _list48 = iprot.ReadListBegin();
+                for( int _i49 = 0; _i49 < _list48.Count; ++_i49)
                 {
-                  int _elem46;
-                  _elem46 = iprot.ReadI32();
-                  Success.Add(_elem46);
+                  int _elem50;
+                  _elem50 = iprot.ReadI32();
+                  Success.Add(_elem50);
                 }
                 iprot.ReadListEnd();
               }
@@ -2313,9 +2551,9 @@ public partial class SimilarityJoinService {
           oprot.WriteFieldBegin(field);
           {
             oprot.WriteListBegin(new TList(TType.I32, Success.Count));
-            foreach (int _iter47 in Success)
+            foreach (int _iter51 in Success)
             {
-              oprot.WriteI32(_iter47);
+              oprot.WriteI32(_iter51);
             }
             oprot.WriteListEnd();
           }
@@ -2420,12 +2658,12 @@ public partial class SimilarityJoinService {
             if (field.Type == TType.List) {
               {
                 Datas = new List<string>();
-                TList _list48 = iprot.ReadListBegin();
-                for( int _i49 = 0; _i49 < _list48.Count; ++_i49)
+                TList _list52 = iprot.ReadListBegin();
+                for( int _i53 = 0; _i53 < _list52.Count; ++_i53)
                 {
-                  string _elem50;
-                  _elem50 = iprot.ReadString();
-                  Datas.Add(_elem50);
+                  string _elem54;
+                  _elem54 = iprot.ReadString();
+                  Datas.Add(_elem54);
                 }
                 iprot.ReadListEnd();
               }
@@ -2467,9 +2705,9 @@ public partial class SimilarityJoinService {
         oprot.WriteFieldBegin(field);
         {
           oprot.WriteListBegin(new TList(TType.String, Datas.Count));
-          foreach (string _iter51 in Datas)
+          foreach (string _iter55 in Datas)
           {
-            oprot.WriteString(_iter51);
+            oprot.WriteString(_iter55);
           }
           oprot.WriteListEnd();
         }
@@ -2571,12 +2809,12 @@ public partial class SimilarityJoinService {
             if (field.Type == TType.List) {
               {
                 Success = new List<int>();
-                TList _list52 = iprot.ReadListBegin();
-                for( int _i53 = 0; _i53 < _list52.Count; ++_i53)
+                TList _list56 = iprot.ReadListBegin();
+                for( int _i57 = 0; _i57 < _list56.Count; ++_i57)
                 {
-                  int _elem54;
-                  _elem54 = iprot.ReadI32();
-                  Success.Add(_elem54);
+                  int _elem58;
+                  _elem58 = iprot.ReadI32();
+                  Success.Add(_elem58);
                 }
                 iprot.ReadListEnd();
               }
@@ -2606,9 +2844,9 @@ public partial class SimilarityJoinService {
           oprot.WriteFieldBegin(field);
           {
             oprot.WriteListBegin(new TList(TType.I32, Success.Count));
-            foreach (int _iter55 in Success)
+            foreach (int _iter59 in Success)
             {
-              oprot.WriteI32(_iter55);
+              oprot.WriteI32(_iter59);
             }
             oprot.WriteListEnd();
           }
@@ -2728,12 +2966,12 @@ public partial class SimilarityJoinService {
             if (field.Type == TType.List) {
               {
                 Datas = new List<string>();
-                TList _list56 = iprot.ReadListBegin();
-                for( int _i57 = 0; _i57 < _list56.Count; ++_i57)
+                TList _list60 = iprot.ReadListBegin();
+                for( int _i61 = 0; _i61 < _list60.Count; ++_i61)
                 {
-                  string _elem58;
-                  _elem58 = iprot.ReadString();
-                  Datas.Add(_elem58);
+                  string _elem62;
+                  _elem62 = iprot.ReadString();
+                  Datas.Add(_elem62);
                 }
                 iprot.ReadListEnd();
               }
@@ -2782,9 +3020,9 @@ public partial class SimilarityJoinService {
         oprot.WriteFieldBegin(field);
         {
           oprot.WriteListBegin(new TList(TType.String, Datas.Count));
-          foreach (string _iter59 in Datas)
+          foreach (string _iter63 in Datas)
           {
-            oprot.WriteString(_iter59);
+            oprot.WriteString(_iter63);
           }
           oprot.WriteListEnd();
         }
@@ -2900,12 +3138,12 @@ public partial class SimilarityJoinService {
             if (field.Type == TType.List) {
               {
                 Success = new List<int>();
-                TList _list60 = iprot.ReadListBegin();
-                for( int _i61 = 0; _i61 < _list60.Count; ++_i61)
+                TList _list64 = iprot.ReadListBegin();
+                for( int _i65 = 0; _i65 < _list64.Count; ++_i65)
                 {
-                  int _elem62;
-                  _elem62 = iprot.ReadI32();
-                  Success.Add(_elem62);
+                  int _elem66;
+                  _elem66 = iprot.ReadI32();
+                  Success.Add(_elem66);
                 }
                 iprot.ReadListEnd();
               }
@@ -2935,9 +3173,9 @@ public partial class SimilarityJoinService {
           oprot.WriteFieldBegin(field);
           {
             oprot.WriteListBegin(new TList(TType.I32, Success.Count));
-            foreach (int _iter63 in Success)
+            foreach (int _iter67 in Success)
             {
-              oprot.WriteI32(_iter63);
+              oprot.WriteI32(_iter67);
             }
             oprot.WriteListEnd();
           }

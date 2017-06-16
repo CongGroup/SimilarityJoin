@@ -106,21 +106,35 @@ void EncIndex::Insert(uint32_t uiLsh, uint32_t uiF, uint32_t uiVal)
 
 }
 
-void EncIndex::QueryOne(uint32_t uiLsh, uint32_t uiF, vector<uint32_t> &vecResult)
+void EncIndex::QueryOne(uint32_t uiLsh, uint32_t uiF, vector<uint32_t> &vecResult,
+	uint64_t* TokenTimer, uint64_t * GetTimer)
 {
     char szCombine[SHA256_DIGEST_LENGTH];
     char szTD[SHA256_DIGEST_LENGTH];
     char szMask[SHA256_DIGEST_LENGTH];
 	//cout << "L is " << uiLsh << " F is " << uiF << " Size is " << SHA256_DIGEST_LENGTH << endl;
-    GenerateTrapdoorAndMask(uiLsh, uiF, szCombine, SHA256_DIGEST_LENGTH, szTD, SHA256_DIGEST_LENGTH, szMask, SHA256_DIGEST_LENGTH);
-    //Add Counter
+	TimeDiff::DiffTimeInMicroSecond();
+	GenerateTrapdoorAndMask(uiLsh, uiF, szCombine, SHA256_DIGEST_LENGTH, szTD, SHA256_DIGEST_LENGTH, szMask, SHA256_DIGEST_LENGTH);
+	if (TokenTimer)
+	{
+		*TokenTimer += TimeDiff::DiffTimeInMicroSecond();
+	}
+	//Add Counter
     uint32_t uiC = 0;
     while (true)
     {
         char szTrapdoorAddC[SHA256_DIGEST_LENGTH];
+		TimeDiff::DiffTimeInMicroSecond();
         PRF::Sha256((char*)&uiC, sizeof(uint32_t), szTD, sizeof(szTD), szTrapdoorAddC, sizeof(szTrapdoorAddC));
-        int iID = m_Get(szTrapdoorAddC, SHA256_DIGEST_LENGTH, szMask, SHA256_DIGEST_LENGTH);
-
+		if (TokenTimer)
+		{
+			*TokenTimer += TimeDiff::DiffTimeInMicroSecond();
+		}
+		int iID = m_Get(szTrapdoorAddC, SHA256_DIGEST_LENGTH, szMask, SHA256_DIGEST_LENGTH);
+		if (GetTimer)
+		{
+			*GetTimer += TimeDiff::DiffTimeInMicroSecond();
+		}
         if (iID == -1)
         {
             return;

@@ -222,28 +222,41 @@ SecureJoin::Proportion SecureJoin::getDistributedofIndex()
 
 vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int ThresholdK, int timeout)
 {
+	perQueryTimerSelfQuery = 0;
+	perQueryTimerComputeLSH = 0;
+	perQueryTimerComputeToken = 0;
+	perQueryTimerGetData = 0;
+	perQueryTimerFilter = 0;
+	perQueryTimerQuery = 0;
+
 	uint32_t uiJoinNum = num;
 	uint64_t ulNeedBandwidthNum = 0;
 	uint32_t uiLimitK = ThresholdK;
 	set<uint32_t> setResult;
 	markSecond();
+	markMicroSecond(1);
 	uint32_t **queryLsh = new uint32_t*[uiJoinNum];
 
 	for (uint32_t uiCur = 0; uiCur < uiJoinNum; uiCur++)
 	{
 		queryLsh[uiCur] = new uint32_t[uiLshL];
+
+		markMicroSecond();
 		computeLsh(queryLsh[uiCur], joinMataData[uiCur]);
+		perQueryTimerComputeLSH += markMicroSecond();
+
 		uint32_t *arQueryLsh = queryLsh[uiCur];
 
 		vector<uint32_t> vecResult;
 		for (uint32_t uiL = 0; uiL < uiLshL; uiL++)
 		{
 			uint32_t uiLsh = arQueryLsh[uiL];
-			encIndex.QueryOne(uiLsh, uiL, vecResult);
+			encIndex.QueryOne(uiLsh, uiL, vecResult,&perQueryTimerComputeToken, &perQueryTimerGetData);
 		}
 		map<uint32_t, uint32_t> mapCombine;
 		vector<uint32_t> vecResultInK;
 
+		markMicroSecond();
 		for (auto it = vecResult.begin(); it != vecResult.end(); it++)
 		{
 			if (++mapCombine[*it] == uiLimitK)
@@ -251,6 +264,7 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 				vecResultInK.push_back(*it);
 			}
 		}
+		perQueryTimerFilter += markMicroSecond();
 
 		ulNeedBandwidthNum += vecResultInK.size();
 		setResult.insert(vecResultInK.begin(), vecResultInK.end());
@@ -275,12 +289,25 @@ vector<int> SecureJoin::joinByStrategy1(double ** joinMataData, int num, int Thr
 		delete[] queryLsh[i];
 	}
 	delete[] queryLsh;
+
+	perQueryTimerQuery += markMicroSecond(1);
 	return vecRes;
 
 }
 
 vector<int> SecureJoin::joinByStrategy2(double ** joinMataData, int num, int ThresholdK, int timeout)
 {
+	//promise that if join 3 use join 2, it will make perQueryTimerSelfQuery a negative num.
+	if (perQueryTimerSelfQuery >= 0)
+	{
+		perQueryTimerSelfQuery = 0;
+		perQueryTimerComputeLSH = 0;
+		perQueryTimerComputeToken = 0;
+		perQueryTimerGetData = 0;
+		perQueryTimerFilter = 0;
+		perQueryTimerQuery = 0;
+	}
+
 	uint32_t uiJoinNum = num;
 	uint32_t uiLimitK = ThresholdK;
 
@@ -291,13 +318,21 @@ vector<int> SecureJoin::joinByStrategy2(double ** joinMataData, int num, int Thr
 	map<uint32_t, map<uint32_t, vector<uint32_t> > >mapCacheResult;
 	set<uint32_t> setResult;
 	markSecond();
+	if (perQueryTimerSelfQuery >= 0)
+	{
+		markMicroSecond(1);
+	}
 
 	uint32_t **queryLsh = new uint32_t*[uiJoinNum];
 
 	for (uint32_t uiCur = 0; uiCur < uiJoinNum; uiCur++)
 	{
 		queryLsh[uiCur] = new uint32_t[uiLshL];
+
+		markMicroSecond();
 		computeLsh(queryLsh[uiCur], joinMataData[uiCur]);
+		perQueryTimerComputeLSH += markMicroSecond();
+
 		uint32_t *arQueryLsh = queryLsh[uiCur];
 		map<uint32_t, uint32_t> mapCombine;
 		vector<uint32_t> vecResultInK;
@@ -314,9 +349,10 @@ vector<int> SecureJoin::joinByStrategy2(double ** joinMataData, int num, int Thr
 			}
 			else
 			{
-				encIndex.QueryOne(uiLsh, uiL, *pVecReslt);
+				encIndex.QueryOne(uiLsh, uiL, *pVecReslt, &perQueryTimerComputeToken, &perQueryTimerGetData);
 				ulNeedBandwidthNum += pVecReslt->size();
 			}
+			markMicroSecond();
 			for (vector<uint32_t>::iterator it = pVecReslt->begin(); it != pVecReslt->end(); it++)
 			{
 				if (++mapCombine[*it] == uiLimitK)
@@ -324,6 +360,7 @@ vector<int> SecureJoin::joinByStrategy2(double ** joinMataData, int num, int Thr
 					vecResultInK.push_back(*it);
 				}
 			}
+			perQueryTimerFilter+=markMicroSecond();
 		}
 
 		setResult.insert(vecResultInK.begin(), vecResultInK.end());
@@ -349,11 +386,24 @@ vector<int> SecureJoin::joinByStrategy2(double ** joinMataData, int num, int Thr
 		delete[]queryLsh[i];
 	}
 	delete[]queryLsh;
+	if (perQueryTimerSelfQuery >= 0)
+	{
+		perQueryTimerQuery += markMicroSecond(1);
+	}
 	return vecRes;
 }
 
 vector<int> SecureJoin::joinByStrategy3(double ** joinMataData, int num, int ThresholdK, double selfQueryR, int timeout)
 {
+	perQueryTimerSelfQuery = 0;
+	perQueryTimerComputeLSH = 0;
+	perQueryTimerComputeToken = 0;
+	perQueryTimerGetData = 0;
+	perQueryTimerFilter = 0;
+	perQueryTimerQuery = 0;
+
+	markMicroSecond(1);
+
 	uint32_t uiJoinNum = num;
 	double dSelfQueryR = selfQueryR;
 
@@ -362,12 +412,15 @@ vector<int> SecureJoin::joinByStrategy3(double ** joinMataData, int num, int Thr
 	for (uint32_t uiCur = 0; uiCur < uiJoinNum; uiCur++)
 	{
 		queryLsh[uiCur] = new uint32_t[uiLshL];
+		markMicroSecond();
 		computeLsh(queryLsh[uiCur], joinMataData[uiCur]);
+		perQueryTimerComputeLSH += markMicroSecond();
+
 		vecJoin.push_back(uiCur);
 	}
 
 	vector<uint32_t> vecSelfQuery;
-
+	markMicroSecond();
 	while (vecJoin.size() != 0)
 	{
 		uint32_t uiOffset = rand() % vecJoin.size();
@@ -391,7 +444,7 @@ vector<int> SecureJoin::joinByStrategy3(double ** joinMataData, int num, int Thr
 			}
 		}
 	}
-
+	perQueryTimerSelfQuery -= markMicroSecond();
 	uint32_t uiSelfQueryNum = vecSelfQuery.size();
 	cout << "After selfQuery the join num is " << uiSelfQueryNum <<endl;
 
@@ -416,6 +469,9 @@ vector<int> SecureJoin::joinByStrategy3(double ** joinMataData, int num, int Thr
 		delete[]arrSelfQueryMataData[i];
 	}
 	delete[]arrSelfQueryMataData;
+
+	perQueryTimerQuery += markMicroSecond(1);
+	perQueryTimerSelfQuery = -perQueryTimerSelfQuery;
 
 	return res;
 }
@@ -505,21 +561,35 @@ void SecureJoin::renormalize(double * arMetaData, uint32_t uiDimension)
 
 void SecureJoin::formalize(double ** arMetaData, uint32_t uiAllNum, uint32_t uiDimension)
 {
+	double* maxValue = new double[uiDimension];
+	double* minValue = new double[uiDimension];
+
+	for (uint32_t uiD = 0; uiD < uiDimension; uiD++)
+	{
+		maxValue[uiD] = -(int64_t)UINT32_MAX;
+		minValue[uiD] = (int64_t)UINT32_MAX;
+	}
+
+	for (uint32_t uiCur = 0; uiCur < uiAllNum; uiCur++)
+	{
+		for (uint32_t uiD = 0; uiD < uiDimension; uiD++)
+		{
+			maxValue[uiD] = maxValue[uiD] > arMetaData[uiCur][uiD] ? maxValue[uiD] : arMetaData[uiCur][uiD];
+			minValue[uiD] = minValue[uiD] < arMetaData[uiCur][uiD] ? minValue[uiD] : arMetaData[uiCur][uiD];
+		}
+	}
+
 	for (uint32_t uiCur = 0; uiCur < uiAllNum; uiCur++)
 	{
 		double *arVal = arMetaData[uiCur];
-		double dMax = 0;
-		double dMin = UINT32_MAX;
 		for (uint32_t uiD = 0; uiD < uiDimension; uiD++)
 		{
-			dMax = dMax > arVal[uiD] ? dMax : arVal[uiD];
-			dMin = dMin < arVal[uiD] ? dMin : arVal[uiD];
-		}
-		for (uint32_t uiD = 0; uiD < uiDimension; uiD++)
-		{
-			arVal[uiD] = (arVal[uiD] - dMin) / (dMax - dMin);
+			arVal[uiD] = (arVal[uiD] - minValue[uiD]) / (maxValue[uiD] - minValue[uiD]);
 		}
 	}
+
+	delete[]maxValue;
+	delete[]minValue;
 }
 
 void SecureJoin::checkAndDeleteArr(void** p)
@@ -628,11 +698,43 @@ char SecureJoin::Type2c(int lvl)
 	return (char)(lvl + 'A');
 }
 
-int SecureJoin::markSecond()
+uint32_t SecureJoin::markSecond(int id)
 {
-	static time_t t_cur(0);
-	uint32_t ui_Time = time(NULL) - t_cur;
-	t_cur = time(NULL);
+	static time_t t_cur[16];
+
+	if (id < 0 || id>15)
+	{
+		for (int i = 0; i < 16; i++)
+		{
+			t_cur[id] = time(NULL);
+		}
+		return 0;
+	}
+
+	uint32_t ui_Time = time(NULL) - t_cur[id];
+	t_cur[id] = time(NULL);
 
 	return ui_Time;
+}
+
+uint32_t SecureJoin::markMicroSecond(int id)
+{
+	static timeval t_start[16];
+	static timeval t_end[16];
+	
+	if (id < 0 || id>15)
+	{
+		for (int i = 0; i < 16; i++)
+		{
+			gettimeofday(&t_start[i], NULL);
+		}
+		return 0;
+	}
+
+	gettimeofday(&t_end[id], NULL);
+	uint32_t uiTimeInterval = 1000000 * (t_end[id].tv_sec - t_start[id].tv_sec) + 
+		t_end[id].tv_usec - t_start[id].tv_usec;
+	gettimeofday(&t_start[id], NULL);
+
+	return uiTimeInterval;
 }
