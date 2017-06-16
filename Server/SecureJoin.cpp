@@ -393,7 +393,7 @@ vector<int> SecureJoin::joinByStrategy3(double ** joinMataData, int num, int Thr
 	}
 
 	uint32_t uiSelfQueryNum = vecSelfQuery.size();
-	cout << "After selfQuery the join num is " << uiSelfQueryNum;
+	cout << "After selfQuery the join num is " << uiSelfQueryNum <<endl;
 
 
 	double ** arrSelfQueryMataData = new double *[uiSelfQueryNum];

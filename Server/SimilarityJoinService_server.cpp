@@ -79,7 +79,7 @@ public:
 			tmpVecStr.clear();
 			joinEngine.splitString(*i, tmpVecStr, " ");
 			memset(buffer, 0, sizeof(double)*dimension);
-			for (int j = 0; j < dimension&&j<tmpVecStr.size(); j++)
+			for (int j = 0; j < dimension && j<tmpVecStr.size(); j++)
 			{
 				buffer[j] = stod(tmpVecStr[j]);
 			}

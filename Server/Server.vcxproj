@@ -113,6 +113,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="Makefile" />
+    <None Include="SimilarityJoin.thrift" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SecureJoin.cpp" />
