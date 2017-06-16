@@ -3,6 +3,7 @@
 #include <time.h>
 #include <sstream>
 #include <sys/shm.h>
+#include <sys/time.h>
 
 #include "SecureJoin.h"
 #include "../Caravel/BukHash.h"
