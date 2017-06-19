@@ -10,9 +10,7 @@ public class IndexDistribution
 {
     public IndexDistribution()
     {
-        //
-        // TODO: Add constructor logic here
-        //
+
     }
 
     public int[] Numbers { get; set; }
