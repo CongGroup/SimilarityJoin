@@ -261,3 +261,10 @@ Press [Enter] to continue...
 ```
 We use top 58 records and join to 10000 records in the index.
 In Strategy III, it used 11 seconds.
+
+# MAINTAINER
+
+  - Xinyu Wang, City University of Hong Kong, xinyucs@gmail.com
+  - Xingliang Yuan, City University of Hong Kong, xyuancs@gmail.com
+  - Mengyu Yao, City University of Hong Kong, mengycs@gmail.com
+
