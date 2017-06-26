@@ -9,9 +9,9 @@
  * Dataset
  * Example
 
-# PUBLICATION (Please replace paper etc.)
+# PUBLICATION
 
-Xingliang Yuan, Xinyu Wang, Cong Wang, Anna Squicciarini, and Kui Ren, "Enabling Privacy-preserving Image-centric Social Discovery", IEEE International Conference on Distributed Computing Systems (ICDCS), Madrid, Spain, 2014. (Acceptance ratio: 66/500 = 13%)
+Xingliang Yuan, Xinyu Wang, Cong Wang, Chenyun Yu, and Sarana Nutanong, “Privacy-preserving Similarity Joins Over Encrypted Data”, IEEE Transactions on Information Forensics and Security (TIFS), Accepted, 2017.
 
 LSH Algorithm and Implementation (E2LSH) (http://www.mit.edu/~andoni/LSH/)
 
@@ -22,6 +22,8 @@ Recommended environment: Ubuntu 14.04 LTS with gcc version 4.8.4.
 This software requires the following libraries:
 
  * OpenSSL (https://www.openssl.org/source/openssl-1.0.2a.tar.gz)
+ * boost C++ library (http://sourceforge.net/projects/boost/files/boost/1.58.0/boost_1_58_0.tar.gz)
+ * Thrift (http://archive.apache.org/dist/thrift/0.9.2/)
 
 # INSTALLATION
 
@@ -29,7 +31,19 @@ Environment setup:
 
 ```shell
 apt-get update
-apt-get install gcc g++ openssl libssl-dev make cmake automake autoconf 
+apt-get install gcc g++ openssl libssl-dev libboost-dev libevent-dev flex bison pkg-config git make cmake automake autoconf 
+```
+
+Thrift installation:
+
+You can find the latest HTTP link on https://thrift.apache.org/
+
+```shell
+ * wget http://archive.apache.org/dist/thrift/0.9.2/thrift-0.9.2.tar.gz
+ * tar zxvf 
+ * cd 
+ * make
+ * make install
 ```
 
 # CONFIGURATION
@@ -44,7 +58,6 @@ Need modify the max share memery size of system setting.
 sysctl -w kernel.shmmax=8589934592
 echo "kernel.shmmax=8589934592" >> /etc/sysctl.conf
 ```
-
 
 # MAKE
 
