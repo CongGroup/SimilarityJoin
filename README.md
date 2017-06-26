@@ -10,7 +10,7 @@
  * Example
  * Acknowledgement
 
-# Overview
+# OVERVIEW
 
 Similarity search on high-dimensional data has been intensively studied for data processing and analytics. Despite its broad applicability, data security and privacy concerns along the trend of data outsourcing have not been fully addressed. In this paper, we investigate privacy-preserving similarity join queries, i.e., a pivotal primitive of similarity search that finds pair-wise similar data points across two datasets. We start from locality-sensitive hashing (LSH) and searchable symmetric encryption (SSE), i.e., the most practical techniques for similarity search and encrypted search respectively. However, the immediate combination of two techniques discloses the distribution of the query set, which is exploitable to compromise the confidentiality of queries. To enhance the security, we propose the frequency hiding query scheme which allows the server to see the flattened query distribution only. To improve the scalability, we further design the result sharing query scheme, which processes a small portion of query points and shares the results with other nearby points. Besides, we set up a strict constraint to carefully select query points to achieve “as-strong-as-possible” guarantees. Experimental results confirm that they have different tradeoffs on security, efficiency, and accuracy, which can flexibly be used for different deployment scenarios.
 
@@ -269,7 +269,7 @@ In Strategy III, it used 11 seconds.
   - Xingliang Yuan, City University of Hong Kong, xyuancs@gmail.com
   - Mengyu Yao, City University of Hong Kong, mengycs@gmail.com
 
-# Acknowledgement
+# ACKNOWLEDGEMENT 
 
 This project is supported in part by Innovation and Technology Commission of Hong Kong under ITF Project ITS/307/15.
 
