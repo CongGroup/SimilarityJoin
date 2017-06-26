@@ -1,6 +1,6 @@
 # Similarity Join Demonstration
 
- * Publications
+ * Overview
  * Requirements
  * Initialization
  * Configuration
@@ -8,12 +8,13 @@
  * Make
  * Dataset
  * Example
+ * Acknowledgement
 
-# PUBLICATION
+# Overview
 
-Xingliang Yuan, Xinyu Wang, Cong Wang, Chenyun Yu, and Sarana Nutanong, “Privacy-preserving Similarity Joins Over Encrypted Data”, IEEE Transactions on Information Forensics and Security (TIFS), Accepted, 2017.
+Similarity search on high-dimensional data has been intensively studied for data processing and analytics. Despite its broad applicability, data security and privacy concerns along the trend of data outsourcing have not been fully addressed. In this paper, we investigate privacy-preserving similarity join queries, i.e., a pivotal primitive of similarity search that finds pair-wise similar data points across two datasets. We start from locality-sensitive hashing (LSH) and searchable symmetric encryption (SSE), i.e., the most practical techniques for similarity search and encrypted search respectively. However, the immediate combination of two techniques discloses the distribution of the query set, which is exploitable to compromise the confidentiality of queries. To enhance the security, we propose the frequency hiding query scheme which allows the server to see the flattened query distribution only. To improve the scalability, we further design the result sharing query scheme, which processes a small portion of query points and shares the results with other nearby points. Besides, we set up a strict constraint to carefully select query points to achieve “as-strong-as-possible” guarantees. Experimental results confirm that they have different tradeoffs on security, efficiency, and accuracy, which can flexibly be used for different deployment scenarios.
 
-LSH Algorithm and Implementation (E2LSH) (http://www.mit.edu/~andoni/LSH/)
+Publication: Xingliang Yuan, Xinyu Wang, Cong Wang, Chenyun Yu, and Sarana Nutanong, “Privacy-preserving Similarity Joins Over Encrypted Data”, IEEE Transactions on Information Forensics and Security (TIFS), Accepted, 2017.
 
 # REQUIREMENTS
 
@@ -205,7 +206,7 @@ The Bhash Has Real Elements : 2998974
 Press [Enter] to continue...
 ```
 We can see each floor status in the index.
-#### Strategy I Time
+#### Strategy I (basic query scheme) Time
 Input ‘7’ and provide some params to test the time of join by Strategy I. 
 ```shell
 please input your self join percent. e.g. 0.1 (10%)  0.2 (20%)
@@ -220,7 +221,7 @@ Press [Enter] to continue...
 ```
 We use top 58 records and join to 10000 records in the index.
 In Strategy I, it used 508 seconds.
-#### Strategy II Time
+#### Strategy II (frequency hiding query scheme) Time
 Input ‘8’ and provide some params to test the time of join by Strategy II. 
 ```shell
 please input your self join percent. e.g. 0.1 (10%)  0.2 (20%)
@@ -237,7 +238,7 @@ Press [Enter] to continue...
 ```
 We use top 58 records and join to 10000 records in the index.
 In Strategy II, it used 28 seconds.
-#### Strategy III Time
+#### Strategy III (result sharing query scheme) Time
 Input ‘b’ and provide some params to test the time of join by Strategy III. 
 ```shell
 please input your self join percent. e.g. 0.1 (10%)  0.2 (20%)
@@ -267,4 +268,8 @@ In Strategy III, it used 11 seconds.
   - Xinyu Wang, City University of Hong Kong, xinyucs@gmail.com
   - Xingliang Yuan, City University of Hong Kong, xyuancs@gmail.com
   - Mengyu Yao, City University of Hong Kong, mengycs@gmail.com
+
+# Acknowledgement
+
+This project is supported in part by Innovation and Technology Commission of Hong Kong under ITF Project ITS/307/15.
 
