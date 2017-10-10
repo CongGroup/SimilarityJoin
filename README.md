@@ -268,7 +268,7 @@ In Strategy III, it used 11 seconds.
   - Xinyu Wang, City University of Hong Kong, xinyucs@gmail.com
   - Xingliang Yuan, City University of Hong Kong, xyuancs@gmail.com
   - Mengyu Yao, City University of Hong Kong, mengycs@gmail.com
-  - Cong Wang, City University of Hong Kong, congwang@cityu.edu.hk
+  - Cong Wang, City University of Hong Kong, congwang@cityu.edu.hk
 
 # ACKNOWLEDGEMENT 
 
